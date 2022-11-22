@@ -58,6 +58,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerControllerTests.cs" />
+    <Compile Include="ErrorLoggerTests.cs" />
     <Compile Include="factAttribute.cs" />
     <Compile Include="HtmlFormatterTests.cs" />
     <Compile Include="MathTests.cs" />
