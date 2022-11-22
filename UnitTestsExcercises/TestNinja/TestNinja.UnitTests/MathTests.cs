@@ -5,12 +5,15 @@ namespace TestNinja.UnitTests
 {
     public class MathTests
     {
+        Math math;
+        public MathTests()
+        {
+            this.math = new Math();
+        }
+
         [Fact]
         public void Add_AddsTwoPositiveNumbers_ReturnsTrueValue()
         {
-            // Arrange
-            Math math = new Math();
-
             // Act
             int result = math.Add(1, 2);
 
@@ -21,9 +24,6 @@ namespace TestNinja.UnitTests
         [Fact]
         public void Max_FirstArgumentIsGreater_ReturnFirstArgument()
         {
-            // Arrange
-            Math math = new Math();
-
             // Act
             int result = math.Max(1, 2);
 
@@ -34,9 +34,6 @@ namespace TestNinja.UnitTests
         [Fact]
         public void Max_SecondArgumentIsGreater_ReturnSecondArgument()
         {
-            // Arrange
-            Math math = new Math();
-
             // Act
             int result = math.Max(2, 1);
 
@@ -47,9 +44,6 @@ namespace TestNinja.UnitTests
         [Fact]
         public void Max_ArgumentsAreEqual_ReturnSecondArgument()
         {
-            // Arrange
-            Math math = new Math();
-
             // Act
             int result = math.Max(1, 1);
 
