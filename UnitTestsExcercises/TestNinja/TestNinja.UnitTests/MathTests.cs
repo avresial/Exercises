@@ -6,6 +6,7 @@ namespace TestNinja.UnitTests
     public class MathTests
     {
         Math math;
+
         public MathTests()
         {
             this.math = new Math();
@@ -21,34 +22,17 @@ namespace TestNinja.UnitTests
             Assert.Equal(3, result);
         }
 
-        [Fact]
-        public void Max_FirstArgumentIsGreater_ReturnFirstArgument()
+        [Theory]
+        [InlineData(2, 1, 2)]
+        [InlineData(1, 2, 2)]
+        [InlineData(1, 1, 1)]
+        public void Max_WhenCalled_ReturnsGreaterArgument(int a, int b, int c)
         {
             // Act
-            int result = math.Max(1, 2);
+            int result = math.Max(a, b);
 
             // Assert
-            Assert.Equal(2, result);
-        }
-
-        [Fact]
-        public void Max_SecondArgumentIsGreater_ReturnSecondArgument()
-        {
-            // Act
-            int result = math.Max(2, 1);
-
-            // Assert
-            Assert.Equal(2, result);
-        }
-
-        [Fact]
-        public void Max_ArgumentsAreEqual_ReturnSecondArgument()
-        {
-            // Act
-            int result = math.Max(1, 1);
-
-            // Assert
-            Assert.Equal(1, result);
+            Assert.Equal(c, result);
         }
 
     }
