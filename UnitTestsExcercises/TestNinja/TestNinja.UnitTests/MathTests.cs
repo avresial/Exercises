@@ -1,4 +1,6 @@
-﻿using TestNinja.Fundamentals;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TestNinja.Fundamentals;
 using Xunit;
 
 namespace TestNinja.UnitTests
@@ -12,7 +14,7 @@ namespace TestNinja.UnitTests
             this.math = new Math();
         }
 
-        [Fact]
+        [Fact(Skip = "Because i test skipping atribute.")]
         public void Add_AddsTwoPositiveNumbers_ReturnsTrueValue()
         {
             // Act
@@ -35,5 +37,15 @@ namespace TestNinja.UnitTests
             Assert.Equal(c, result);
         }
 
+        [Fact]
+        public void GetOddNumbers_LimitIsGraterThenZero_ReturnOddNumbersUpToLimit()
+        {
+            // Act
+            IEnumerable<int> result = math.GetOddNumbers(5);
+
+            // Assert
+            // Assert.Equal(3, result.Count());
+            Assert.Equivalent(new[] { 1, 3, 5 }, result);
+        }
     }
 }
