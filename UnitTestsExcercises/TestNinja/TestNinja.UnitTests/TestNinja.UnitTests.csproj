@@ -58,12 +58,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerControllerTests.cs" />
-    <Compile Include="ErrorLoggerTests.cs" />
-    <Compile Include="factAttribute.cs" />
-    <Compile Include="HtmlFormatterTests.cs" />
-    <Compile Include="MathTests.cs" />
-    <Compile Include="ReservationTests.cs" />
+    <Compile Include="Fundamentals\FizzBuzzTests.cs" />
+    <Compile Include="Fundamentals\CustomerControllerTests.cs" />
+    <Compile Include="Fundamentals\ErrorLoggerTests.cs" />
+    <Compile Include="Fundamentals\factAttribute.cs" />
+    <Compile Include="Fundamentals\HtmlFormatterTests.cs" />
+    <Compile Include="Fundamentals\MathTests.cs" />
+    <Compile Include="Fundamentals\ReservationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
