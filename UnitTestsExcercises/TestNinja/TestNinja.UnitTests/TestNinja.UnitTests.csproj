@@ -66,6 +66,7 @@
     <Compile Include="Fundamentals\HtmlFormatterTests.cs" />
     <Compile Include="Fundamentals\MathTests.cs" />
     <Compile Include="Fundamentals\ReservationTests.cs" />
+    <Compile Include="Fundamentals\StackTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
