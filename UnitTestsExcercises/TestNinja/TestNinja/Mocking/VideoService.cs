@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.IO;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace TestNinja.Mocking
 {
     public class VideoService
     {
-        IFileReader fileReader;
+        private IFileReader fileReader;
+        private IVideoRepository videoRepository;
 
-        public VideoService(IFileReader fileReader)
+        public VideoService(IFileReader fileReader, IVideoRepository videoRepository)
         {
             this.fileReader = fileReader;
+            this.videoRepository = videoRepository;
         }
+
         public string ReadVideoTitle()
         {
             string str = this.fileReader.Read("video.txt");
@@ -25,15 +25,12 @@ namespace TestNinja.Mocking
             return video.Title;
         }
 
-        public string GetUnprocessedVideosAsCsv(IVideoContext videoContext)
+        public string GetUnprocessedVideosAsCsv()
         {
             var videoIds = new List<int>();
 
-            using (IVideoContext context = videoContext)
-            {
-                foreach (Video v in context.GetVideos())
-                    videoIds.Add(v.Id);
-            }
+            foreach (Video v in videoRepository.GetUnprocessedVideos())
+                videoIds.Add(v.Id);
 
             return string.Join(",", videoIds);
         }
@@ -46,21 +43,8 @@ namespace TestNinja.Mocking
         public bool IsProcessed { get; set; }
     }
 
-    public interface IVideoContext : IDisposable
+    public class VideoContext : DbContext
     {
-        IEnumerable<Video> GetVideos();
-    }
-
-    public class VideoContext : DbContext, IVideoContext
-    {
-        private DbSet<Video> videos;
-        public VideoContext(DbSet<Video> videos)
-        {
-            this.videos = videos;
-        }
-        public IEnumerable<Video> GetVideos()
-        {
-            return videos.ToList();
-        }
+        public DbSet<Video> Videos { get; set; }
     }
 }

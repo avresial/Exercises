@@ -1,8 +1,6 @@
 ﻿using Moq;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.Entity;
 using TestNinja.Mocking;
 using Xunit;
 
@@ -16,7 +14,7 @@ namespace TestNinja.UnitTests.Mocking
             Mock<IFileReader> fileReader = new Mock<IFileReader>();
             fileReader.Setup(fr => fr.Read("video.txt")).Returns("");
 
-            VideoService videoService = new VideoService(fileReader.Object);
+            VideoService videoService = new VideoService(fileReader.Object, null);
 
             var result = videoService.ReadVideoTitle();
 
@@ -26,17 +24,15 @@ namespace TestNinja.UnitTests.Mocking
         [Fact]
         public void GetUnprocessedVideosAsCsv_SingleVideo_ReturnsStringWitkNoSeparator()
         {
-            Mock<IFileReader> fileReader = new Mock<IFileReader>();
-            fileReader.Setup(fr => fr.Read("video.txt")).Returns("");
-
-            Mock<IVideoContext> VideoContext = new Mock<IVideoContext>();
+            Mock<IVideoRepository> VideoRepository = new Mock<IVideoRepository>();
 
             List<Video> videos = new List<Video>() { new Video() { Id = 1, Title = "test", IsProcessed = true } };
-            VideoContext.Setup(fr => fr.GetVideos()).Returns(videos);
-            VideoService videoService = new VideoService(fileReader.Object);
+            VideoRepository.Setup(fr => fr.GetUnprocessedVideos()).Returns(videos);
+
+            VideoService videoService = new VideoService(null, VideoRepository.Object);
 
 
-            var result = videoService.GetUnprocessedVideosAsCsv(VideoContext.Object);
+            var result = videoService.GetUnprocessedVideosAsCsv();
 
             Assert.Equal("1", result);
         }
@@ -44,20 +40,17 @@ namespace TestNinja.UnitTests.Mocking
         [Fact]
         public void GetUnprocessedVideosAsCsv_TwoVideos_ReturnsStringWitkSeparator()
         {
-            Mock<IFileReader> fileReader = new Mock<IFileReader>();
-            fileReader.Setup(fr => fr.Read("video.txt")).Returns("");
-
-            Mock<IVideoContext> VideoContext = new Mock<IVideoContext>();
+            Mock<IVideoRepository> VideoRepository = new Mock<IVideoRepository>();
 
             List<Video> videos = new List<Video>() {
                 new Video() { Id = 1, Title = "test", IsProcessed = true },
                 new Video() { Id = 2, Title = "test", IsProcessed = true }
             };
-            VideoContext.Setup(fr => fr.GetVideos()).Returns(videos);
-            VideoService videoService = new VideoService(fileReader.Object);
 
+            VideoRepository.Setup(fr => fr.GetUnprocessedVideos()).Returns(videos);
+            VideoService videoService = new VideoService(null, VideoRepository.Object);
 
-            var result = videoService.GetUnprocessedVideosAsCsv(VideoContext.Object);
+            var result = videoService.GetUnprocessedVideosAsCsv();
 
             Assert.Equal("1,2", result);
         }
@@ -65,17 +58,14 @@ namespace TestNinja.UnitTests.Mocking
         [Fact]
         public void GetUnprocessedVideosAsCsv_ZeroVideos_ReturnsEmptyString()
         {
-            Mock<IFileReader> fileReader = new Mock<IFileReader>();
-            fileReader.Setup(fr => fr.Read("video.txt")).Returns("");
-
-            Mock<IVideoContext> VideoContext = new Mock<IVideoContext>();
+            Mock<IVideoRepository> VideoRepository = new Mock<IVideoRepository>();
 
             List<Video> videos = new List<Video>();
-            VideoContext.Setup(fr => fr.GetVideos()).Returns(videos);
-            VideoService videoService = new VideoService(fileReader.Object);
+            VideoRepository.Setup(fr => fr.GetUnprocessedVideos()).Returns(videos);
+            VideoService videoService = new VideoService(null, VideoRepository.Object);
 
 
-            var result = videoService.GetUnprocessedVideosAsCsv(VideoContext.Object);
+            var result = videoService.GetUnprocessedVideosAsCsv();
 
             Assert.Equal(string.Empty, result);
         }
@@ -83,14 +73,9 @@ namespace TestNinja.UnitTests.Mocking
         [Fact]
         public void GetUnprocessedVideosAsCsv_VideoContextIsNull_ReturnsException()
         {
-            Mock<IFileReader> fileReader = new Mock<IFileReader>();
-            fileReader.Setup(fr => fr.Read("video.txt")).Returns("");
+            VideoService videoService = new VideoService(null,null);
 
-            Mock<IVideoContext> VideoContext = new Mock<IVideoContext>();
-
-            VideoService videoService = new VideoService(fileReader.Object);
-
-            Exception ex = Record.Exception(() => videoService.GetUnprocessedVideosAsCsv(null));
+            Exception ex = Record.Exception(() => videoService.GetUnprocessedVideosAsCsv());
 
             Assert.IsType<NullReferenceException>(ex);
         }
