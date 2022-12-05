@@ -8,64 +8,60 @@ namespace TestNinja.UnitTests.Mocking
 {
     public class VideoServiceTests
     {
+        Mock<IFileReader> fileReader;
+        Mock<IVideoRepository> videoRepository;
+        VideoService videoService;
+
+        public VideoServiceTests()
+        {
+            this.fileReader = new Mock<IFileReader>();
+            this.videoRepository = new Mock<IVideoRepository>();
+            videoService = new VideoService(this.fileReader.Object, this.videoRepository.Object);
+        }
+
         [Fact]
         public void ReadVideoTitle_EmptyFile_ReturnError()
         {
-            Mock<IFileReader> fileReader = new Mock<IFileReader>();
-            fileReader.Setup(fr => fr.Read("video.txt")).Returns("");
+            fileReader.Setup(r => r.Read("video.txt")).Returns("");
 
-            VideoService videoService = new VideoService(fileReader.Object, null);
-
-            var result = videoService.ReadVideoTitle();
+            string result = videoService.ReadVideoTitle();
 
             Assert.Contains("error", result, StringComparison.InvariantCultureIgnoreCase);
         }
 
         [Fact]
-        public void GetUnprocessedVideosAsCsv_SingleVideo_ReturnsStringWitkNoSeparator()
+        public void GetUnprocessedVideosAsCsv_SingleUnprocessedVideo_ReturnsStringWitkNoSeparator()
         {
-            Mock<IVideoRepository> VideoRepository = new Mock<IVideoRepository>();
+            List<Video> videos = new List<Video>() { new Video() { Id = 1 } };
+            videoRepository.Setup(r => r.GetUnprocessedVideos()).Returns(videos);
 
-            List<Video> videos = new List<Video>() { new Video() { Id = 1, Title = "test", IsProcessed = true } };
-            VideoRepository.Setup(fr => fr.GetUnprocessedVideos()).Returns(videos);
-
-            VideoService videoService = new VideoService(null, VideoRepository.Object);
-
-
-            var result = videoService.GetUnprocessedVideosAsCsv();
+            string result = videoService.GetUnprocessedVideosAsCsv();
 
             Assert.Equal("1", result);
         }
 
         [Fact]
-        public void GetUnprocessedVideosAsCsv_TwoVideos_ReturnsStringWitkSeparator()
+        public void GetUnprocessedVideosAsCsv_TwoUnprocessedVideos_ReturnsStringWitkSeparator()
         {
-            Mock<IVideoRepository> VideoRepository = new Mock<IVideoRepository>();
-
             List<Video> videos = new List<Video>() {
-                new Video() { Id = 1, Title = "test", IsProcessed = true },
-                new Video() { Id = 2, Title = "test", IsProcessed = true }
+                new Video() { Id = 1},
+                new Video() { Id = 2}
             };
 
-            VideoRepository.Setup(fr => fr.GetUnprocessedVideos()).Returns(videos);
-            VideoService videoService = new VideoService(null, VideoRepository.Object);
+            videoRepository.Setup(r => r.GetUnprocessedVideos()).Returns(videos);
 
-            var result = videoService.GetUnprocessedVideosAsCsv();
+            string result = videoService.GetUnprocessedVideosAsCsv();
 
             Assert.Equal("1,2", result);
         }
 
         [Fact]
-        public void GetUnprocessedVideosAsCsv_ZeroVideos_ReturnsEmptyString()
+        public void GetUnprocessedVideosAsCsv_AllVideosAreProcessed_ReturnsEmptyString()
         {
-            Mock<IVideoRepository> VideoRepository = new Mock<IVideoRepository>();
-
             List<Video> videos = new List<Video>();
-            VideoRepository.Setup(fr => fr.GetUnprocessedVideos()).Returns(videos);
-            VideoService videoService = new VideoService(null, VideoRepository.Object);
+            videoRepository.Setup(r => r.GetUnprocessedVideos()).Returns(videos);
 
-
-            var result = videoService.GetUnprocessedVideosAsCsv();
+            string result = videoService.GetUnprocessedVideosAsCsv();
 
             Assert.Equal(string.Empty, result);
         }
@@ -73,7 +69,7 @@ namespace TestNinja.UnitTests.Mocking
         [Fact]
         public void GetUnprocessedVideosAsCsv_VideoContextIsNull_ReturnsException()
         {
-            VideoService videoService = new VideoService(null,null);
+            VideoService videoService = new VideoService(null, null);
 
             Exception ex = Record.Exception(() => videoService.GetUnprocessedVideosAsCsv());
 
