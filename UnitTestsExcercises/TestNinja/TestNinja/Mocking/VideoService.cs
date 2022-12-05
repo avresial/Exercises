@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace TestNinja.Mocking
 {
-    public class VideoService 
+    public class VideoService
     {
         IFileReader fileReader;
 
@@ -21,25 +21,21 @@ namespace TestNinja.Mocking
             var video = JsonConvert.DeserializeObject<Video>(str);
             if (video == null)
                 return "Error parsing the video.";
+
             return video.Title;
         }
 
-        public string GetUnprocessedVideosAsCsv()
+        public string GetUnprocessedVideosAsCsv(IVideoContext videoContext)
         {
             var videoIds = new List<int>();
 
-            using (var context = new VideoContext())
+            using (IVideoContext context = videoContext)
             {
-                var videos =
-                    (from video in context.Videos
-                     where !video.IsProcessed
-                     select video).ToList();
-
-                foreach (var v in videos)
+                foreach (Video v in context.GetVideos())
                     videoIds.Add(v.Id);
-
-                return String.Join(",", videoIds);
             }
+
+            return string.Join(",", videoIds);
         }
     }
 
@@ -50,8 +46,21 @@ namespace TestNinja.Mocking
         public bool IsProcessed { get; set; }
     }
 
-    public class VideoContext : DbContext
+    public interface IVideoContext : IDisposable
     {
-        public DbSet<Video> Videos { get; set; }
+        IEnumerable<Video> GetVideos();
+    }
+
+    public class VideoContext : DbContext, IVideoContext
+    {
+        private DbSet<Video> videos;
+        public VideoContext(DbSet<Video> videos)
+        {
+            this.videos = videos;
+        }
+        public IEnumerable<Video> GetVideos()
+        {
+            return videos.ToList();
+        }
     }
 }
