@@ -12,8 +12,7 @@ namespace TestNinja.Mocking
 
         public ActionResult DeleteEmployee(int id)
         {
-            Employee employee = employeeStorage.FindEmployee(id);
-            employeeStorage.RemoveEmployee(employee);
+            employeeStorage.RemoveEmployee(id);
 
             return RedirectToAction("Employees");
         }

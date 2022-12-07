@@ -10,13 +10,11 @@
             _db = employeeContext ?? new EmployeeContext();
         }
 
-        public Employee FindEmployee(int id)
+        public void RemoveEmployee(int id)
         {
-            return _db.Employees.Find(id);
-        }
+            Employee employee = _db.Employees.Find(id);
+            if (employee == null) return;
 
-        public void RemoveEmployee(Employee employee)
-        {
             _db.Employees.Remove(employee);
             _db.SaveChanges();
         }

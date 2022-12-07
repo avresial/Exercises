@@ -2,7 +2,6 @@
 {
     public interface IEmployeeStorage
     {
-        Employee FindEmployee(int id);
-        void RemoveEmployee(Employee employee);
+        void RemoveEmployee(int id);
     }
 }
