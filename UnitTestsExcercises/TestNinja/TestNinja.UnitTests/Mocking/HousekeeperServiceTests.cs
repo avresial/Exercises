@@ -9,25 +9,31 @@ namespace TestNinja.UnitTests.Mocking
 {
     public class HousekeeperServiceTests
     {
+        private Mock<IStatementSaver> statementSaver = new Mock<IStatementSaver>();
+        private Mock<IEmailSender> emailService = new Mock<IEmailSender>();
+        private Mock<IUnitOfWork> unitOfWork = new Mock<IUnitOfWork>();
+        private HousekeeperService housekeeperService;
+        private DateTime statementDate = new DateTime(2022, 1, 1);
+        private Housekeeper housekeeper;
+
+        public HousekeeperServiceTests()
+        {
+            housekeeper = new Housekeeper() { Email = "a", FullName = "b", Oid = 1, StatementEmailBody = "c" };
+            unitOfWork.Setup(x => x.Query<Housekeeper>())
+                        .Returns(new List<Housekeeper> { housekeeper }
+                        .AsQueryable);
+
+            var xtraMessageBox = new Mock<IXtraMessageBox>();
+            housekeeperService = new HousekeeperService(statementSaver.Object, emailService.Object, unitOfWork.Object, xtraMessageBox.Object);
+
+        }
 
         [Fact]
         public void SendStatementEmails_WhenCalled_ShouldGeneratesStatements()
         {
-            var statementSaver = new Mock<IStatementSaver>();
-            var emailService = new Mock<IEmailSender>();
-            var unitOfWork = new Mock<IUnitOfWork>();
+            var result = housekeeperService.SendStatementEmails(statementDate);
 
-            unitOfWork.Setup(x => x.Query<Housekeeper>())
-                .Returns(new List<Housekeeper> {
-                    new Housekeeper() { Email = "a", FullName = "b", Oid = 1, StatementEmailBody = "c" }
-                }.AsQueryable<Housekeeper>);
-
-            var xtraMessageBox = new Mock<IXtraMessageBox>();
-            var service = new HousekeeperService(statementSaver.Object, emailService.Object, unitOfWork.Object, xtraMessageBox.Object);
-
-            var result = service.SendStatementEmails(new DateTime(2022, 1, 1));
-
-            statementSaver.Verify(g => g.SaveStatement(1, "b", new DateTime(2022, 1, 1)));
+            statementSaver.Verify(g => g.SaveStatement(housekeeper.Oid, housekeeper.FullName, statementDate));
         }
     }
 }
