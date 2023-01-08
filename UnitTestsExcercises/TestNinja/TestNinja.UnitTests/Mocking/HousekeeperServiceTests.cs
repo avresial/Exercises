@@ -13,6 +13,7 @@ namespace TestNinja.UnitTests.Mocking
         private Mock<IStatementSaver> statementSaver = new Mock<IStatementSaver>();
         private Mock<IEmailSender> emailService = new Mock<IEmailSender>();
         private Mock<IUnitOfWork> unitOfWork = new Mock<IUnitOfWork>();
+        private Mock<IXtraMessageBox> xtraMessageBox = new Mock<IXtraMessageBox>();
         private HousekeeperService housekeeperService;
         private DateTime statementDate = new DateTime(2022, 1, 1);
         private Housekeeper housekeeper;
@@ -27,8 +28,7 @@ namespace TestNinja.UnitTests.Mocking
             unitOfWork.Setup(x => x.Query<Housekeeper>())
                         .Returns(new List<Housekeeper> { housekeeper }
                         .AsQueryable);
-
-            var xtraMessageBox = new Mock<IXtraMessageBox>();
+            
             housekeeperService = new HousekeeperService(statementSaver.Object, emailService.Object, unitOfWork.Object, xtraMessageBox.Object);
         }
 
@@ -57,11 +57,11 @@ namespace TestNinja.UnitTests.Mocking
         public void SendStatementEmails_WhenCalled_EmailtheStatement()
         {
             housekeeperService.SendStatementEmails(statementDate);
-            
+
             VerifyEmailWasSent();
         }
 
-       
+
 
         [Theory]
         [InlineData(null)]
@@ -74,6 +74,16 @@ namespace TestNinja.UnitTests.Mocking
             housekeeperService.SendStatementEmails(statementDate);
 
             VerifyEmailWasNotSend();
+        }
+
+        [Fact]
+        public void SendStatementEmails_EmailSendingFails_DisplayAMessageBox()
+        {
+            emailService.Setup(es => es.EmailFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Throws<Exception>();
+
+            housekeeperService.SendStatementEmails(statementDate);
+
+            xtraMessageBox.Verify(mb => mb.Show(It.IsAny<string>(), It.IsAny<string>(), MessageBoxButtons.OK));
         }
 
         private void VerifyEmailWasSent()
