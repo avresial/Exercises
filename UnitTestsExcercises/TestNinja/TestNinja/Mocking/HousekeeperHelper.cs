@@ -2,10 +2,22 @@ using System;
 
 namespace TestNinja.Mocking
 {
-    public static class HousekeeperHelper
+    public class HousekeeperHelper
     {
+        private readonly IStatementSaver statementSaver;
+        private readonly IEmailService emailService;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IXtraMessageBox xtraMessageBox;
 
-        public static bool SendStatementEmails(DateTime statementDate, IStatementSaver statementSaver, IEmailService emailService, IUnitOfWork unitOfWork)
+        public HousekeeperHelper(IStatementSaver statementSaver, IEmailService emailService, IUnitOfWork unitOfWork, IXtraMessageBox xtraMessageBox)
+        {
+            this.statementSaver = statementSaver;
+            this.emailService = emailService;
+            this.unitOfWork = unitOfWork;
+            this.xtraMessageBox = xtraMessageBox;
+        }
+
+        public bool SendStatementEmails(DateTime statementDate)
         {
             var housekeepers = unitOfWork.Query<Housekeeper>();
 
@@ -29,7 +41,7 @@ namespace TestNinja.Mocking
                 }
                 catch (Exception e)
                 {
-                    XtraMessageBox.Show(e.Message, string.Format("Email failure: {0}", emailAddress),
+                    xtraMessageBox.Show(e.Message, string.Format("Email failure: {0}", emailAddress),
                         MessageBoxButtons.OK);
                 }
             }
@@ -43,9 +55,14 @@ namespace TestNinja.Mocking
         OK
     }
 
-    public class XtraMessageBox
+    public interface IXtraMessageBox
     {
-        public static void Show(string s, string housekeeperStatements, MessageBoxButtons ok)
+        void Show(string s, string housekeeperStatements, MessageBoxButtons ok);
+    }
+
+    public class XtraMessageBox : IXtraMessageBox
+    {
+        public void Show(string s, string housekeeperStatements, MessageBoxButtons ok)
         {
         }
     }
