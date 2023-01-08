@@ -25,7 +25,6 @@ namespace TestNinja.UnitTests.Mocking
 
             var xtraMessageBox = new Mock<IXtraMessageBox>();
             housekeeperService = new HousekeeperService(statementSaver.Object, emailService.Object, unitOfWork.Object, xtraMessageBox.Object);
-
         }
 
         [Fact]
@@ -34,6 +33,19 @@ namespace TestNinja.UnitTests.Mocking
             var result = housekeeperService.SendStatementEmails(statementDate);
 
             statementSaver.Verify(g => g.SaveStatement(housekeeper.Oid, housekeeper.FullName, statementDate));
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void SendStatementEmails_WhenParameterIsInvalid_ShouldNotGenerateStatement(string email)
+        {
+            housekeeper.Email = email;
+
+            var result = housekeeperService.SendStatementEmails(statementDate);
+
+            statementSaver.Verify(g => g.SaveStatement(housekeeper.Oid, housekeeper.FullName, statementDate), Times.Never);
         }
     }
 }
