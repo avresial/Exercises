@@ -3,9 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnline.Web", "ShopOnline.Web\ShopOnline.Web.csproj", "{532218D8-E6D0-4CDE-8ABE-3CF52D638D97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnline.Web", "ShopOnline.Web\ShopOnline.Web.csproj", "{532218D8-E6D0-4CDE-8ABE-3CF52D638D97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnline.API", "ShopOnline.API\ShopOnline.API.csproj", "{3ED66C33-5FA0-4EDE-89BC-7B4B9571FA40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnline.API", "ShopOnline.API\ShopOnline.API.csproj", "{3ED66C33-5FA0-4EDE-89BC-7B4B9571FA40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnline.Models", "ShopOnline.Models\ShopOnline.Models.csproj", "{BD39FA7F-3E6C-499E-B3A8-68268BC0C22D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{A6464ADF-F6E2-450A-936D-DD8E52856953}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +28,10 @@ Global
 		{3ED66C33-5FA0-4EDE-89BC-7B4B9571FA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ED66C33-5FA0-4EDE-89BC-7B4B9571FA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ED66C33-5FA0-4EDE-89BC-7B4B9571FA40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD39FA7F-3E6C-499E-B3A8-68268BC0C22D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD39FA7F-3E6C-499E-B3A8-68268BC0C22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD39FA7F-3E6C-499E-B3A8-68268BC0C22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD39FA7F-3E6C-499E-B3A8-68268BC0C22D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
