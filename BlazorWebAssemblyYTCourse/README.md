@@ -1,0 +1,1 @@
+This directory contains tasks done whle learning from following  [YT Blazor course](https://www.youtube.com/watch?v=sHuuo9L3e5c&t=1799s&ab_channel=freeCodeCamp.org) 
