@@ -4,24 +4,24 @@
 
 @if (Products == null)
 {
-	<h3>Loading products ...</h3>
+    <h3>Loading products ...</h3>
 }
 else
 {
-	var productCount = Products.Count();
-	@if (productCount > 0)
-	{
-		var groupedProductsByCategory = GetGrouppedProductsByCathegory();
+    var productCount = Products.Count();
+    @if (productCount > 0)
+    {
+        var groupedProductsByCategory = GetGrouppedProductsByCathegory();
 
-		foreach (var prodGroup in groupedProductsByCategory)
-		{
-			<h4> @GetCathegoryName(prodGroup)</h4>
-			<div class="row mt-3">
-				<DisplayProducts Products="@prodGroup"></DisplayProducts>
-			</div>
-			<hr class="mb-3" />
-		}
-		@*const int itemsPerRow = 4;
+        foreach (var prodGroup in groupedProductsByCategory)
+        {
+            <h4> @GetCathegoryName(prodGroup)</h4>
+            <div class="row mt-3">
+                <DisplayProducts Products="@prodGroup.Take(4)"></DisplayProducts>
+            </div>
+            <hr class="mb-3" />
+        }
+        @* const int itemsPerRow = 4;
 		var productRowList = new List<ProductDto>();
 
 		@for (int i = 0; i < productCount; i++)
@@ -30,6 +30,6 @@ else
 			<div class="row mt-3">
 				<DisplayProducts Products="@productRowList"></DisplayProducts>
 			</div>
-		}*@
-	}
+		} *@
+    }
 }
