@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopOnline.API.Extensions;
 using ShopOnline.API.Repositories.Contracts;
 using ShopOnline.Models.DTos;
 
@@ -21,18 +22,19 @@ namespace ShopOnline.API.Controllers
             try
             {
                 var products = await productRepository.GetItems();
-                var productsCathegories = await productRepository.GetCategories();
+                var productsCategories = await productRepository.GetCategories();
 
-                if (products is null || productsCathegories is null)
+                if (products is null || productsCategories is null)
                     return NotFound();
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+                var productDtos = products.ConvertToDto(productsCategories).ToList();
 
-            return null;
+                return Ok(productDtos);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
+            }
         }
     }
 }
