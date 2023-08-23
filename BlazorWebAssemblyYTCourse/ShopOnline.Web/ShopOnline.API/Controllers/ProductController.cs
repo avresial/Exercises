@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopOnline.API.Extensions;
 using ShopOnline.API.Repositories.Contracts;
-using ShopOnline.Models.DTos;
+using ShopOnline.Models.Dtos;
 
 namespace ShopOnline.API.Controllers
 {

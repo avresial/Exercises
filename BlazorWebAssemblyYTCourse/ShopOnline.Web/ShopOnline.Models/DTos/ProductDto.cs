@@ -1,4 +1,4 @@
-﻿namespace ShopOnline.Models.DTos
+﻿namespace ShopOnline.Models.Dtos
 {
     public class ProductDto
     {
