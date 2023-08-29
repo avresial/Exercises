@@ -65,7 +65,9 @@ namespace ShopOnline.API.Repositories
 						  {
 							  Id = cartItem.Id,
 							  Qty = cartItem.Qty,
-							  CartId = cartItem.CartId
+							  CartId = cartItem.CartId,
+							  ProductId = cartItem.ProductId
+							  
 						  }).ToListAsync();
 		}
 		public Task<CartItem> UpdateQty(int id, CartItemQtyUpdateDto cartItemQtyUpdateDto)
