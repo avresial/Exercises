@@ -29,6 +29,37 @@ namespace ShopOnline.Web.Pages
             RemoveCartItem(id);
         }
 
+        protected async Task UpdateQtyCartItem_Click(int id, int qty) 
+        {
+            try
+            {
+                if (qty > 0)
+                {
+                    var updateItemDto = new CartItemQtyUpdateDto()
+                    {
+                        CartItemId = id,
+                        Qty = qty
+                    };
+
+                    var returnedUpdateItemDto = await ShoppingCartService.UpdateQty(updateItemDto);
+                }
+                else 
+                {
+                    var item = ShoppingCartItems.FirstOrDefault(x => x.Id == id);
+                    if (item is not null)
+                    {
+                        item.Qty = 1;
+                        item.TotalPrice = item.Price;
+                    }
+                
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         private CartItemDto GetCartItemDto(int id)
         {
             return ShoppingCartItems.FirstOrDefault(x => x.Id == id);

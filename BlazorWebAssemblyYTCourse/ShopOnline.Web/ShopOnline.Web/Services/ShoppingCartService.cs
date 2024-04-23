@@ -1,7 +1,10 @@
-﻿using ShopOnline.Models.Dtos;
+﻿using Newtonsoft.Json;
+using ShopOnline.Models.Dtos;
 using ShopOnline.Models.DTos;
 using ShopOnline.Web.Services.Contracts;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json.Serialization;
 
 namespace ShopOnline.Web.Services
 {
@@ -71,6 +74,7 @@ namespace ShopOnline.Web.Services
         {
             try
             {
+                
                 var response = await httpClient.DeleteAsync($"api/ShoppingCart/{id}");
 
                 if (response.IsSuccessStatusCode)
@@ -81,6 +85,25 @@ namespace ShopOnline.Web.Services
             catch (Exception ex)
             {
 
+                throw;
+            }
+        }
+
+        public async Task<CartItemDto> UpdateQty(CartItemQtyUpdateDto cartItemQtyUpdateDto)
+        {
+            try
+            {
+                var jsonRequest = JsonConvert.SerializeObject(cartItemQtyUpdateDto);
+                var content = new StringContent(jsonRequest,Encoding.UTF8,"application/json-patch+json");
+                var response = await httpClient.PatchAsync($"api/ShoppingCart/{cartItemQtyUpdateDto.CartItemId}", content);
+
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadFromJsonAsync<CartItemDto>();
+
+                return default(CartItemDto);
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }
