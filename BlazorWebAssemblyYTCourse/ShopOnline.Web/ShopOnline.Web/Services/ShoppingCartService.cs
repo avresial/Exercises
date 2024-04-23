@@ -12,6 +12,8 @@ namespace ShopOnline.Web.Services
     {
         private readonly HttpClient httpClient;
 
+        public event Action<int> OnShoppingCartChanged;
+
         public ShoppingCartService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
@@ -106,6 +108,11 @@ namespace ShopOnline.Web.Services
             {
                 throw;
             }
+        }
+
+        public void RaiseEventOnShoppingCartChanged(int qty)
+        {
+            OnShoppingCartChanged?.Invoke(qty);
         }
     }
 }
