@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ShopOnline.Models.Dtos;
+using ShopOnline.Models.DTos;
 using ShopOnline.Web.Services.Contracts;
 
 namespace ShopOnline.Web.Pages
@@ -8,13 +9,20 @@ namespace ShopOnline.Web.Pages
 	{
 		[Inject]
 		public IProductService ProductService { get; set; }
-		public IEnumerable<ProductDto> Products { get; set; }
+        [Inject]
+        public IShoppingCartService ShoppingCartService { get; set; }
+        public IEnumerable<ProductDto> Products { get; set; }
+        public IEnumerable<CartItemDto> ShoppingCartsItems { get; set; }
 
 
 		protected override async Task OnInitializedAsync()
 		{
 			Products = await ProductService.GetItems();
-		}
+            ShoppingCartsItems = await ShoppingCartService.GetItems(HardCoded.UserId);
+
+			var totalQty = ShoppingCartsItems.Sum(x => x.Qty);
+			ShoppingCartService.RaiseEventOnShoppingCartChanged(totalQty);
+        }
 
 		protected IOrderedEnumerable<IGrouping<int, ProductDto>> GetGrouppedProductsByCathegory()
 		{
