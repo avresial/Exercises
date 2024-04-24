@@ -2,6 +2,7 @@
 using ShopOnline.API.Extensions;
 using ShopOnline.API.Repositories.Contracts;
 using ShopOnline.Models.Dtos;
+using ShopOnline.Models.DTos;
 
 namespace ShopOnline.API.Controllers
 {
@@ -57,5 +58,25 @@ namespace ShopOnline.API.Controllers
 				return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
 			}
 		}
-	}
+        
+		[HttpGet]
+		[Route(nameof(GetProductCategories))]
+        public async Task<ActionResult<ProductCategoryDto>> GetProductCategories()
+        {
+            try
+            {
+                var categories = await productRepository.GetCategories();
+
+                if (categories is null) return BadRequest();
+
+                var productDto = categories.ConvertToDto();
+                return Ok(productDto);
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
+            }
+        }
+    }
 }
