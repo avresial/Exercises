@@ -1,0 +1,52 @@
+﻿@page "/ProductByCategory/{CategoryId:int}"
+
+@if (Products == null)
+{
+    <DisplaySpinner />
+}
+else
+{
+    @if (Products is not null && Products.Any())
+    {
+        <div class="row mt-3">
+            <DisplayProducts Products="@Products"></DisplayProducts>
+        </div>
+        <hr class="mb-3" />
+    }
+}
+
+@code {
+    [Inject]
+    public IProductService ProductService { get; set; }
+
+    int _CategoryId;
+    [Parameter]
+    public int CategoryId { get; set; }
+
+    public IEnumerable<ProductDto> Products { get; set; }
+    public string ErrorMessage { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Products = await ProductService.GetItemsByCategory(CategoryId);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            Products = await ProductService.GetItemsByCategory(CategoryId);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+}

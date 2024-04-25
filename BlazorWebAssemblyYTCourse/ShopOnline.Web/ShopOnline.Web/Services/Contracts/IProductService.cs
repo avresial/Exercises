@@ -1,4 +1,5 @@
 ﻿using ShopOnline.Models.Dtos;
+using ShopOnline.Models.DTos;
 
 namespace ShopOnline.Web.Services.Contracts
 {
@@ -6,5 +7,7 @@ namespace ShopOnline.Web.Services.Contracts
     {
         Task<IEnumerable<ProductDto>> GetItems();
         Task<ProductDto> GetItem(int id);
+        Task<IEnumerable<ProductCategoryDto>> GetProductCategories();
+        Task<IEnumerable<ProductDto>> GetItemsByCategory(int categoryId);
     }
 }

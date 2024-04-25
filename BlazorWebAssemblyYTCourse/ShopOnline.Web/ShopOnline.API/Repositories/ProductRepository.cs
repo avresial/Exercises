@@ -5,7 +5,7 @@ using ShopOnline.API.Repositories.Contracts;
 
 namespace ShopOnline.API.Repositories
 {
-	public class ProductRepository : IProductRepository
+    public class ProductRepository : IProductRepository
 	{
 		private readonly ShopOnlineDbContext shopOnlineDbContext;
 
@@ -35,5 +35,10 @@ namespace ShopOnline.API.Repositories
 		{
 			return await shopOnlineDbContext.Products.ToListAsync();
 		}
-	}
+
+        public async Task<IEnumerable<Product>> GetItemsByCategory(int categoryId)
+        {
+            return await shopOnlineDbContext.Products.Where(x => x.CategoryId == categoryId).ToListAsync(); 
+        }
+    }
 }
