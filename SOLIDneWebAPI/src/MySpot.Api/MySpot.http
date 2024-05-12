@@ -15,9 +15,17 @@ Content-Type: application/json
 
 {
     "EmployeeName": "John Doe",
-    "ParkingSpotName": "P2",
+    "ParkingSpotName": "P3",
     "LicensePlate": "XYZ123"
 }
 
 ###
-PUT {{url}}/Reservations
+PUT {{url}}/Reservations/1
+Content-Type: application/json
+
+{
+    "LicensePlate": "XYZ111"
+}
+
+###
+DELETE {{url}}/Reservations/1
