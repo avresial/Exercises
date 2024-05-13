@@ -19,12 +19,12 @@ namespace MySpot.Api.Services
         public IEnumerable<Reservation> GetAllWeekly() => weeklyParkingSpots.SelectMany(x => x.Reservations);
         public Guid? Create(Reservation reservation)
         {
-
             var weeklyParkingSpot = weeklyParkingSpots.FirstOrDefault(x => x.Id == reservation.ParkingSpotId);
 
-            if (weeklyParkingSpot == null) 
+            if (weeklyParkingSpot == null)
                 return default;
 
+            reservation.Id = Guid.NewGuid();
             weeklyParkingSpot.AddReservation(reservation);
 
             return reservation.Id;
