@@ -20,4 +20,12 @@ Content-Type: application/json
 }
 
 ###
-PUT {{url}}/Reservations
+PUT {{url}}/Reservations/1
+Content-Type: application/json
+
+{
+    "LicensePlate": "XYZ111"
+}
+
+###
+DELETE {{url}}/Reservations/1

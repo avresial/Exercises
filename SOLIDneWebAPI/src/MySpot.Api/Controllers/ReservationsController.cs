@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MySpot.Api.Models;
+using MySpot.Api.Commands;
+using MySpot.Api.Entities;
+using MySpot.Api.Services;
 
 namespace MySpot.Api.Controllers
 {
@@ -7,46 +9,52 @@ namespace MySpot.Api.Controllers
 	[Route("reservations")]
 	public class ReservationsController : ControllerBase
 	{
-		private static readonly List<Reservation> reservations = new();
-		private readonly List<string> parkingSpotNames = new()
-		{
-			"P1", "P2", "P3", "P4", "P5"
-		};
 
-		private static int id = 1;
+		private readonly ReservationsService service = new();
 
 		[HttpGet]
-		public IEnumerable<Reservation> Get() => reservations;
+		public ActionResult<IEnumerable<Reservation>> Get() => Ok(service.GetAllWeekly());
 
-		[HttpGet("{id:int}")]
-		public IEnumerable<Reservation> Get(int id)
+		[HttpGet("{id:guid}")]
+		public ActionResult<Reservation> Get(Guid id)
 		{
-			var result = reservations.Where(x => x.Id == id);
+			var reservation = service.Get(id);
 
-			if (result is null)
-			{
-				HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-				return default;
-			}
+			if (reservation is null)
+				return NotFound();
 
-			return result;
+			return Ok(reservation);
 		}
 
 		[HttpPost]
-		public ActionResult Post(Reservation reservation)
+		public ActionResult Post(CreateReservationParkingSpot command)
 		{
-			if (parkingSpotNames.All(x => x != reservation.ParkingSpotName))
+			var id = service.Create(command with { ReservationId = Guid.NewGuid() });
+
+			if (id is null)
 				return BadRequest();
 
-			reservation.Date = DateTime.UtcNow.AddDays(1).Date;
+			return CreatedAtAction(nameof(Get), new { id = command.ReservationId }, null);
+		}
 
-			if (reservations.Any(x => x.ParkingSpotName == reservation.ParkingSpotName && x.Date == reservation.Date))
-				return BadRequest();
+		[HttpPut("{id:guid}")]
+		public ActionResult Put(Guid id, Reservation reservation)
+		{
+			reservation.Id = id;
 
-			reservation.Id = id++;
-			reservations.Add(reservation);
+			if (!service.Updtae(reservation))
+				return NotFound();
 
-			return CreatedAtAction(nameof(Get), new { id = reservation.Id }, null);
+			return NoContent();
+		}
+
+		[HttpDelete("{id:guid}")]
+		public ActionResult Delete(Guid id)
+		{
+			if (!service.Delete(id))
+				return NotFound();
+
+			return NoContent();
 		}
 
 	}

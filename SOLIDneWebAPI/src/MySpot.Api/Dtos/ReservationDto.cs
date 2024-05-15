@@ -1,10 +1,10 @@
-﻿namespace MySpot.Api.Models
+﻿namespace MySpot.Api.Dtos
 {
-	public class Reservation
+	public class ReservationDto
 	{
-		public int Id { get; set; }
+		public Guid Id { get; set; };
+		public Guid ParkingSpotId { get; set; };
 		public string EmployeeName { get; set; }
-		public string ParkingSpotName { get; set; }
 		public string LicensePlate { get; set; }
 		public DateTime Date { get; set; }
 	}
