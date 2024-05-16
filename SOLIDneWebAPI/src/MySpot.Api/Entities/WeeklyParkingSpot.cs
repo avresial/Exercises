@@ -6,7 +6,6 @@ namespace MySpot.Api.Entities
     {
         private readonly HashSet<Reservation> reservations = new();
 
-
         public Guid Id { get; }
         public DateTime From { get; }
         public DateTime To { get; }
@@ -24,7 +23,7 @@ namespace MySpot.Api.Entities
 
         public void AddReservation(Reservation reservation)
         {
-            var isInvalidDate = (reservation.Date.Date < From || reservation.Date.Date > To || reservation.Date.Date < DateTime.UtcNow.Date);
+            var isInvalidDate = (reservation.Date.Date < From.Date || reservation.Date.Date > To || reservation.Date.Date.Date < DateTime.UtcNow.Date);
 
             if (isInvalidDate)
                 throw new InvalidReservationDateException(reservation.Date.Date);
@@ -35,6 +34,14 @@ namespace MySpot.Api.Entities
                 throw new ParkingSpotAlreadyReservedException(reservation.EmployeeName, reservation.Date.Date);
             
             reservations.Add(reservation);
+        }
+
+        public void RemoveReservation(Reservation reservation)
+        {
+            if (!reservations.Contains(reservation))
+                throw new Exception("Reservation does not exist.");
+
+            reservations.Remove(reservation);
         }
     }
 }
