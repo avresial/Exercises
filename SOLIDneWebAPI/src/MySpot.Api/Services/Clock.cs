@@ -1,7 +1,9 @@
-﻿namespace MySpot.Api.Services
+﻿using MySpot.Api.ValueObjects;
+
+namespace MySpot.Api.Services
 {
     public class Clock
     {
-        public DateTime Current() => DateTime.Now;
+        public Date Current() => Date.Now;
     }
 }

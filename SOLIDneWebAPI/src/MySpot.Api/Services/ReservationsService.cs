@@ -34,7 +34,7 @@ namespace MySpot.Api.Services
                 return default;
 
             var reservation = new Reservation(command.ReservationId, command.ParkingSpotId, command.EmployeeName, command.LicensePlate, command.date);
-            weeklyParkingSpot.AddReservation(reservation);
+            weeklyParkingSpot.AddReservation(reservation, clock.Current());
 
             return reservation.Id;
         }
@@ -54,7 +54,7 @@ namespace MySpot.Api.Services
             existingReservation.ChangeLicensePlate(command.LicensePlate);
 
 
-            if (existingReservation.Date <= DateTime.UtcNow)
+            if (existingReservation.Date <= clock.Current())
                 return false;
 
 
