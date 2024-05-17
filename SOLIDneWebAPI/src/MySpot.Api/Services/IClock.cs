@@ -2,8 +2,8 @@
 
 namespace MySpot.Api.Services
 {
-	public class Clock : IClock
+	public interface IClock
 	{
-		public Date Current() => Date.Now;
+		Date Current();
 	}
 }
