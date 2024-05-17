@@ -8,7 +8,7 @@ namespace MySpot.Api.ValueObjects
 		public EmployeeName(string value)
 		{
 			if (string.IsNullOrWhiteSpace(value))
-				throw new EmptyLicensePlateException();
+				throw new InvalidEmployeeNameException();
 
 			Value = value;
 		}
