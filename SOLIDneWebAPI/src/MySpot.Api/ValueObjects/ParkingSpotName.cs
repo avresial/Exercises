@@ -8,7 +8,7 @@ namespace MySpot.Api.ValueObjects
 		public ParkingSpotName(string value)
 		{
 			if (string.IsNullOrWhiteSpace(value))
-				throw new EmptyLicensePlateException();
+				throw new InvalidParkingSpotNameException();
 
 			Value = value;
 		}
