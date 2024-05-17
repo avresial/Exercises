@@ -1,32 +1,27 @@
-﻿using MySpot.Api.Exceptions;
+﻿using MySpot.Api.ValueObjects;
 
 namespace MySpot.Api.Entities
 {
-    public class Reservation
-    {
-        public Guid Id { get; }
-        public Guid ParkingSpotId { get; private set; }
-        public string EmployeeName { get; private set; }
-        public string LicensePlate { get; private set; }
-        public DateTime Date { get; private set; }
+	public class Reservation
+	{
+		public ReservationId Id { get; }
+		public ParkingSpotId ParkingSpotId { get; private set; }
+		public EmployeeName EmployeeName { get; private set; }
+		public LicensePlate LicensePlate { get; private set; }
+		public Date Date { get; private set; }
 
 
-        public Reservation(Guid id, Guid parkingSpotId, string employeeName, string licensePlate, DateTime date)
-        {
-            Id = id;
-            ParkingSpotId = parkingSpotId;
-            EmployeeName = employeeName;
+		public Reservation(ReservationId id, ParkingSpotId parkingSpotId, EmployeeName employeeName, LicensePlate licensePlate, Date date)
+		{
+			Id = id;
+			ParkingSpotId = parkingSpotId;
+			EmployeeName = employeeName;
 
-            ChangeLicensePlate(licensePlate);
-            Date = date;
-        }
+			ChangeLicensePlate(licensePlate);
+			Date = date;
+		}
 
-        public void ChangeLicensePlate(string licensePlate)
-        {
-            if (string.IsNullOrWhiteSpace(licensePlate))
-                throw new EmptyLicensePlateException();
-
-            LicensePlate = licensePlate;
-        }
-    }
+		public void ChangeLicensePlate(LicensePlate licensePlate)
+			=> LicensePlate = licensePlate;
+	}
 }
