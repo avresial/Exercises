@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySpot.Api.Commands;
 using MySpot.Api.Dtos;
-using MySpot.Api.Entities;
 using MySpot.Api.Services;
-using MySpot.Api.ValueObjects;
 
 namespace MySpot.Api.Controllers
 {
@@ -11,16 +9,15 @@ namespace MySpot.Api.Controllers
 	[Route("reservations")]
 	public class ReservationsController : ControllerBase
 	{
-		private static readonly IClock clock = new Clock();
+		private readonly IClock clock = new Clock();
 
-		private static readonly ReservationsService service = new(new()
-			{
-				new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000001"),new Week(clock.Current().Value.Date),"P1"),
-				new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000002"),new Week(clock.Current().Value.Date),"P2"),
-				new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000003"),new Week(clock.Current().Value.Date),"P3"),
-				new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000004"),new Week(clock.Current().Value.Date),"P4"),
-				new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000005"),new Week(clock.Current().Value.Date),"P5"),
-			});
+		private readonly IReservationsService service;
+
+		public ReservationsController(IClock clock, IReservationsService service)
+		{
+			this.clock = clock;
+			this.service = service;
+		}
 
 		[HttpGet]
 		public ActionResult<IEnumerable<ReservationDto>> Get() => Ok(service.GetAllWeekly());
