@@ -1,62 +1,68 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySpot.Api.Commands;
 using MySpot.Api.Dtos;
-using MySpot.Api.Entities;
 using MySpot.Api.Services;
 
 namespace MySpot.Api.Controllers
 {
-    [ApiController]
-    [Route("reservations")]
-    public class ReservationsController : ControllerBase
-    {
+	[ApiController]
+	[Route("reservations")]
+	public class ReservationsController : ControllerBase
+	{
+		private readonly IClock clock = new Clock();
 
-        private readonly ReservationsService service = new();
+		private readonly IReservationsService service;
 
-        [HttpGet]
-        public ActionResult<IEnumerable<ReservationDto>> Get() => Ok(service.GetAllWeekly());
+		public ReservationsController(IClock clock, IReservationsService service)
+		{
+			this.clock = clock;
+			this.service = service;
+		}
 
-        [HttpGet("{id:guid}")]
-        public ActionResult<ReservationDto> Get(Guid id)
-        {
-            var reservation = service.Get(id);
+		[HttpGet]
+		public ActionResult<IEnumerable<ReservationDto>> Get() => Ok(service.GetAllWeekly());
 
-            if (reservation is null)
-                return NotFound();
+		[HttpGet("{id:guid}")]
+		public ActionResult<ReservationDto> Get(Guid id)
+		{
+			var reservation = service.Get(id);
 
-            return Ok(reservation);
-        }
+			if (reservation is null)
+				return NotFound();
 
-        [HttpPost]
-        public ActionResult Post(CreateReservationParkingSpot command)
-        {
-            var id = service.Create(command with { ReservationId = Guid.NewGuid() });
+			return Ok(reservation);
+		}
 
-            if (id is null)
-                return BadRequest();
+		[HttpPost]
+		public ActionResult Post(CreateReservationParkingSpot command)
+		{
+			var id = service.Create(command with { ReservationId = Guid.NewGuid() });
 
-            return CreatedAtAction(nameof(Get), new { id = command.ReservationId }, null);
-        }
+			if (id is null)
+				return BadRequest();
 
-        [HttpPut("{id:guid}")]
-        public ActionResult Put(Guid id, ChangeReservationLicensePlate commmand)
-        {
+			return CreatedAtAction(nameof(Get), new { id = command.ReservationId }, null);
+		}
+
+		[HttpPut("{id:guid}")]
+		public ActionResult Put(Guid id, ChangeReservationLicensePlate commmand)
+		{
 
 
-            if (!service.Updtae(commmand with { ReservationId = id }))
-                return NotFound();
+			if (!service.Updtae(commmand with { ReservationId = id }))
+				return NotFound();
 
-            return NoContent();
-        }
+			return NoContent();
+		}
 
-        [HttpDelete("{id:guid}")]
-        public ActionResult Delete(Guid id)
-        {
-            if (!service.Delete(new DeleteReservation(id)))
-                return NotFound();
+		[HttpDelete("{id:guid}")]
+		public ActionResult Delete(Guid id)
+		{
+			if (!service.Delete(new DeleteReservation(id)))
+				return NotFound();
 
-            return NoContent();
-        }
+			return NoContent();
+		}
 
-    }
+	}
 }
