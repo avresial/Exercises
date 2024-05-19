@@ -5,7 +5,7 @@ using MySpot.Api.ValueObjects;
 
 namespace MySpot.Api.Services
 {
-	public class ReservationsService
+	public class ReservationsService : IReservationsService
 	{
 		private readonly IClock clock = new Clock();
 		private readonly IEnumerable<WeeklyParkingSpot> weeklyParkingSpots;

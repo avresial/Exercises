@@ -11,9 +11,9 @@ namespace MySpot.Api.Controllers
 	{
 		private readonly IClock clock = new Clock();
 
-		private readonly ReservationsService service;
+		private readonly IReservationsService service;
 
-		public ReservationsController(IClock clock, ReservationsService service)
+		public ReservationsController(IClock clock, IReservationsService service)
 		{
 			this.clock = clock;
 			this.service = service;

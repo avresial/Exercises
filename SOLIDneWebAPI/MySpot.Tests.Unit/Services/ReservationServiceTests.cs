@@ -10,7 +10,7 @@ namespace MySpot.Tests.Unit.Services
 	{
 		#region Arrange
 		private readonly IClock clock = new Clock();
-		private readonly ReservationsService reservationsService;
+		private readonly IReservationsService reservationsService;
 		private readonly List<WeeklyParkingSpot> weeklyParkingSpots;
 
 		public ReservationServiceTests()
@@ -23,7 +23,7 @@ namespace MySpot.Tests.Unit.Services
 				new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000004"),new Week(clock.Current().Value.Date),"P4"),
 				new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000005"),new Week(clock.Current().Value.Date),"P5"),
 			};
-			reservationsService = new ReservationsService(weeklyParkingSpots);
+			reservationsService = new ReservationsService(clock, weeklyParkingSpots);
 		}
 
 		#endregion

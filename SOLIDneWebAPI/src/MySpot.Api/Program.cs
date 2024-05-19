@@ -17,7 +17,7 @@ builder.Services.AddSingleton<IClock, Clock>()
 						new (Guid.Parse("00000000-0000-0000-0000-000000000005"),new Week(clock.Current().Value.Date),"P5"),
 					};
 				})
-				.AddSingleton<ReservationsService>()
+				.AddSingleton<IReservationsService, ReservationsService>()
 				.AddControllers();
 
 
