@@ -9,4 +9,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\MySpot.Application\MySpot.Application.csproj" />
+    <ProjectReference Include="..\..\MySpot.Infrastructure\MySpot.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\MySpotCore\MySpotCore.csproj" />
+  </ItemGroup>
+
 </Project>
