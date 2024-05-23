@@ -1,14 +1,13 @@
 ﻿using MySpot.Core.Entities;
 using MySpot.Core.ValueObjects;
 using MySpot.Core.Repositories;
-using MySpot.Application.Services;
 using MySpot.Application.Commands;
 
 namespace MySpot.Application.Services
 {
-	public class ReservationsService : IReservationsService
+    public class ReservationsService : IReservationsService
 	{
-		private readonly IClock clock = new Clock();
+		private readonly IClock clock;
 		private readonly IWeeklyParkingSpotRepository weeklyParkingSpots;
 
 		public ReservationsService(IClock clock, IWeeklyParkingSpotRepository weeklyParkingSpots)

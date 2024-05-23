@@ -9,7 +9,7 @@ namespace MySpot.Api.Controllers
 	[Route("reservations")]
 	public class ReservationsController : ControllerBase
 	{
-		private readonly IClock clock = new Clock();
+		private readonly IClock clock;
 
 		private readonly IReservationsService service;
 

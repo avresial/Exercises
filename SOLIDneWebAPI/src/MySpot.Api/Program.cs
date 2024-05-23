@@ -1,3 +1,4 @@
+using MySpot.Application;
 using MySpot.Application.Services;
 using MySpot.Core.Entities;
 using MySpot.Core.Repositories;
@@ -24,10 +25,9 @@ builder.Services.AddSingleton<IClock, Clock>()
 				.AddSingleton<IReservationsService, ReservationsService>()
 				.AddSingleton<IWeeklyParkingSpotRepository, InMemoryWeeklyParkingSpotRepository>()
 				.AddCore()
-				.AddApplication()
                 .AddInfrastructure()
+				.AddApplication()
                 .AddControllers();
-
 
 var app = builder.Build();
 app.MapControllers();
