@@ -13,4 +13,7 @@
     <ProjectReference Include="..\MySpot.Application\MySpot.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="MySpot.Tests.Unit"/>
+  </ItemGroup>
 </Project>

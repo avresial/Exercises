@@ -5,13 +5,12 @@ using MySpot.Core.Repositories;
 
 namespace MySpot.Infrastructure.Repositories
 {
-	public class InMemoryWeeklyParkingSpotRepository : IWeeklyParkingSpotRepository
+	internal class InMemoryWeeklyParkingSpotRepository : IWeeklyParkingSpotRepository
 	{
 		private List<WeeklyParkingSpot> _weeklyParkingSpots = new();
 
 		public InMemoryWeeklyParkingSpotRepository(IClock clock)
 		{
-			Clock = clock;
 			_weeklyParkingSpots = new List<WeeklyParkingSpot>()
 					{
 						new (Guid.Parse("00000000-0000-0000-0000-000000000001"),new Week(clock.Current().Value.Date),"P1"),
@@ -22,7 +21,6 @@ namespace MySpot.Infrastructure.Repositories
 					};
 		}
 
-		public IClock Clock { get; }
 
 		public void Add(WeeklyParkingSpot parkingSpot)
 		{
