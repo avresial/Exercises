@@ -1,7 +1,9 @@
-﻿using MySpot.Api.Commands;
-using MySpot.Api.Repositories;
-using MySpot.Api.Services;
+﻿using MySpot.Application.Commands;
+using MySpot.Application.Services;
+using MySpot.Core.Repositories;
 using Shouldly;
+using MySpot.Infrastructure.Repositories;
+using MySpot.Tests.Unit.Shared;
 
 namespace MySpot.Tests.Unit.Services
 {
@@ -14,7 +16,7 @@ namespace MySpot.Tests.Unit.Services
 
 		public ReservationServiceTests()
 		{
-			clock = new Clock();
+			clock = new TestClock();
 			weeklyParkingSpots = new InMemoryWeeklyParkingSpotRepository(clock);
 			reservationsService = new ReservationsService(clock, weeklyParkingSpots);
 		}

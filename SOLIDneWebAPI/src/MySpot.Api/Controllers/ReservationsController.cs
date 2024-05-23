@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MySpot.Api.Commands;
-using MySpot.Api.Dtos;
-using MySpot.Api.Services;
+using MySpot.Application;
+using MySpot.Application.Commands;
+using MySpot.Application.Services;
 
 namespace MySpot.Api.Controllers
 {
@@ -9,7 +9,7 @@ namespace MySpot.Api.Controllers
 	[Route("reservations")]
 	public class ReservationsController : ControllerBase
 	{
-		private readonly IClock clock = new Clock();
+		private readonly IClock clock;
 
 		private readonly IReservationsService service;
 
