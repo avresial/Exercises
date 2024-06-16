@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MySpotCore\MySpotCore.csproj" />
+    <ProjectReference Include="..\MySpot.Core\MySpot.Core.csproj" />
   </ItemGroup>
 
 </Project>

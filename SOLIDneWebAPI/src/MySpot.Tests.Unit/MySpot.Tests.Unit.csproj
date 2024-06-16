@@ -19,7 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\MySpot.Api\MySpot.Api.csproj" />
+    <ProjectReference Include="..\MySpot.Api\MySpot.Api.csproj" />
+    <ProjectReference Include="..\MySpot.Infrastructure\MySpot.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
