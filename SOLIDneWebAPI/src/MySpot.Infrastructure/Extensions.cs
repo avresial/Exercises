@@ -11,11 +11,10 @@ namespace MySpot.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddPostgress()
-                    .AddSingleton<IWeeklyParkingSpotRepository, InMemoryWeeklyParkingSpotRepository>()
-                    .AddSingleton<IClock, Clock>();
-
-
+            services
+                .AddSingleton<IClock, Clock>()
+                .AddSingleton<IWeeklyParkingSpotRepository, InMemoryWeeklyParkingSpotRepository>()
+                .AddPostgress();
 
             return services;
         }
