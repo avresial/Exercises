@@ -9,10 +9,12 @@ namespace MySpot.Infrastructure.DAL
     {
         public static IServiceCollection AddPostgress(this IServiceCollection services)
         {
-            const string connectionString = "Host=localhost;Database=Myspot;Username=postgres;Password=";
+            const string connectionString = "Host=localhost;Database=Myspot;Username=postgres;Password=postgres";
 
             services.AddDbContext<MySpotDbContext>(x => x.UseNpgsql(connectionString));
             services.AddScoped<IWeeklyParkingSpotRepository, PostgresWeeklyParkingSpotRepository>();
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             return services;
         }
