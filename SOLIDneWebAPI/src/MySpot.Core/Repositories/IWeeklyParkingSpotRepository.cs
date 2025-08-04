@@ -3,13 +3,13 @@ using MySpot.Core.ValueObjects;
 
 namespace MySpot.Core.Repositories
 {
-	public interface IWeeklyParkingSpotRepository
-	{
-		WeeklyParkingSpot Get(ParkingSpotId id);
-		IEnumerable<WeeklyParkingSpot> GetAll();
+    public interface IWeeklyParkingSpotRepository
+    {
+        Task<WeeklyParkingSpot> GetAsync(ParkingSpotId id);
+        Task<IEnumerable<WeeklyParkingSpot>> GetAllAsync();
 
-		void Add(WeeklyParkingSpot parkingSpot);
-		void Update(WeeklyParkingSpot parkingSpot);
-		void Delete(WeeklyParkingSpot parkingSpot);
-	}
+        Task AddAsync(WeeklyParkingSpot parkingSpot);
+        Task UpdateAsync(WeeklyParkingSpot parkingSpot);
+        Task DeleteAsync(WeeklyParkingSpot parkingSpot);
+    }
 }
