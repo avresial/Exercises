@@ -2,6 +2,7 @@
 using MySpot.Application;
 using MySpot.Application.Commands;
 using MySpot.Application.Services;
+using MySpot.Core.Services;
 
 namespace MySpot.Api.Controllers
 {

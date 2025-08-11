@@ -1,6 +1,6 @@
-﻿using MySpot.Application.Services;
-using MySpot.Core.Entities;
+﻿using MySpot.Core.Entities;
 using MySpot.Core.Repositories;
+using MySpot.Core.Services;
 using MySpot.Core.ValueObjects;
 
 namespace MySpot.Infrastructure.DAL.Repositories

@@ -19,7 +19,7 @@ namespace MySpot.Core.Entities
             Name = name;
         }
 
-        public void AddReservation(Reservation reservation, Date now)
+        internal void AddReservation(Reservation reservation, Date now)
         {
             var isInvalidDate = (reservation.Date < week.From || reservation.Date > week.To || reservation.Date < now);
 

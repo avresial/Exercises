@@ -29,7 +29,11 @@ namespace MySpot.Infrastructure.DAL.Repositories
         => mySpotDbContext.WeeklyParkingSpots
                             .Include(x => x.Reservations)
                             .SingleAsync(x => x.Id == id);
-
+        public async Task<IEnumerable<WeeklyParkingSpot>> GetByWeekAsync(Week week)
+        => await mySpotDbContext.WeeklyParkingSpots
+                    .Include(x => x.Reservations)
+                    .Where(x => x.week == week)
+                    .ToListAsync();
         public async Task<IEnumerable<WeeklyParkingSpot>> GetAllAsync()
         {
             var result = await mySpotDbContext.WeeklyParkingSpots
