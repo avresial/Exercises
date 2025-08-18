@@ -13,32 +13,40 @@ namespace MySpot.Infrastructure.DAL.Repositories
             this.mySpotDbContext = mySpotDbContext;
         }
 
-        public void Add(WeeklyParkingSpot parkingSpot)
+        public async Task AddAsync(WeeklyParkingSpot parkingSpot)
         {
-            mySpotDbContext.Add(parkingSpot);
-            mySpotDbContext.SaveChanges();
+            await mySpotDbContext.AddAsync(parkingSpot);
+            await mySpotDbContext.SaveChangesAsync();
         }
 
-        public void Delete(WeeklyParkingSpot parkingSpot)
+        public async Task DeleteAsync(WeeklyParkingSpot parkingSpot)
         {
             mySpotDbContext.Remove(parkingSpot);
-            mySpotDbContext.SaveChanges();
+            await mySpotDbContext.SaveChangesAsync();
         }
 
-        public WeeklyParkingSpot Get(ParkingSpotId id)
+        public Task<WeeklyParkingSpot> GetAsync(ParkingSpotId id)
         => mySpotDbContext.WeeklyParkingSpots
                             .Include(x => x.Reservations)
-                            .Single(x => x.Id == id);
+                            .SingleAsync(x => x.Id == id);
+        public async Task<IEnumerable<WeeklyParkingSpot>> GetByWeekAsync(Week week)
+        => await mySpotDbContext.WeeklyParkingSpots
+                    .Include(x => x.Reservations)
+                    .Where(x => x.Week == week)
+                    .ToListAsync();
+        public async Task<IEnumerable<WeeklyParkingSpot>> GetAllAsync()
+        {
+            var result = await mySpotDbContext.WeeklyParkingSpots
+                                .Include(x => x.Reservations)
+                                .ToListAsync();
 
-        public IEnumerable<WeeklyParkingSpot> GetAll()
-        => mySpotDbContext.WeeklyParkingSpots
-                            .Include(x => x.Reservations)
-                            .ToList();
+            return result.AsEnumerable();
+        }
 
-        public void Update(WeeklyParkingSpot parkingSpot)
+        public async Task UpdateAsync(WeeklyParkingSpot parkingSpot)
         {
             mySpotDbContext.Update(parkingSpot);
-            mySpotDbContext.SaveChanges();
+            await mySpotDbContext.SaveChangesAsync();
         }
     }
 }

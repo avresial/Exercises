@@ -1,10 +1,10 @@
-﻿using MySpot.Application.Services;
-using MySpot.Core.ValueObjects;
+﻿using MySpot.Core.Services;
 
 namespace MySpot.Tests.Unit.Shared
 {
     internal class TestClock : IClock
     {
-        public Date Current() => new Date(new DateTime(2024, 05, 20));
+        //public Date Current() => new Date(DateTime.UtcNow.Date);
+        public DateTime Current() => new(2020, 01, 01, 12, 0, 0);
     }
 }

@@ -8,7 +8,7 @@ builder.Services.AddCore()
                 .AddControllers();
 
 var app = builder.Build();
-app.MapControllers();
 
+app.UseInfrastructure();
 
 app.Run();
