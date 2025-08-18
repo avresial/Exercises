@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MySpot.Application.Services;
 using MySpot.Core.Entities;
+using MySpot.Core.Services;
 using MySpot.Core.ValueObjects;
 
 namespace MySpot.Infrastructure.DAL;
@@ -28,11 +28,11 @@ internal class DatabaseInitializer : IHostedService
             var clock = scope.ServiceProvider.GetRequiredService<IClock>();
             weeklyParkingSpots = new List<WeeklyParkingSpot>()
                     {
-                        new (Guid.Parse("00000000-0000-0000-0000-000000000001"),new Week(clock.Current().Value.Date),"P1"),
-                        new (Guid.Parse("00000000-0000-0000-0000-000000000002"),new Week(clock.Current().Value.Date),"P2"),
-                        new (Guid.Parse("00000000-0000-0000-0000-000000000003"),new Week(clock.Current().Value.Date),"P3"),
-                        new (Guid.Parse("00000000-0000-0000-0000-000000000004"),new Week(clock.Current().Value.Date),"P4"),
-                        new (Guid.Parse("00000000-0000-0000-0000-000000000005"),new Week(clock.Current().Value.Date),"P5"),
+                        new (Guid.Parse("00000000-0000-0000-0000-000000000001"),new Week(clock.Current().Date),"P1"),
+                        new (Guid.Parse("00000000-0000-0000-0000-000000000002"),new Week(clock.Current().Date),"P2"),
+                        new (Guid.Parse("00000000-0000-0000-0000-000000000003"),new Week(clock.Current().Date),"P3"),
+                        new (Guid.Parse("00000000-0000-0000-0000-000000000004"),new Week(clock.Current().Date),"P4"),
+                        new (Guid.Parse("00000000-0000-0000-0000-000000000005"),new Week(clock.Current().Date),"P5"),
                     };
             dbContext.WeeklyParkingSpots.AddRange(weeklyParkingSpots);
             dbContext.SaveChanges();
