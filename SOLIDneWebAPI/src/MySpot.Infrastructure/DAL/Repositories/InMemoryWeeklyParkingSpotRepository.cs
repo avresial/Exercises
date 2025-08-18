@@ -13,15 +13,19 @@ namespace MySpot.Infrastructure.DAL.Repositories
         {
             _weeklyParkingSpots = new List<WeeklyParkingSpot>()
             {
-                new (Guid.Parse("00000000-0000-0000-0000-000000000001"),new Week(clock.Current().Value.Date),"P1"),
-                new (Guid.Parse("00000000-0000-0000-0000-000000000002"),new Week(clock.Current().Value.Date),"P2"),
-                new (Guid.Parse("00000000-0000-0000-0000-000000000003"),new Week(clock.Current().Value.Date),"P3"),
-                new (Guid.Parse("00000000-0000-0000-0000-000000000004"),new Week(clock.Current().Value.Date),"P4"),
-                new (Guid.Parse("00000000-0000-0000-0000-000000000005"),new Week(clock.Current().Value.Date),"P5"),
+                new (Guid.Parse("00000000-0000-0000-0000-000000000001"),new Week(clock.Current().Date),"P1"),
+                new (Guid.Parse("00000000-0000-0000-0000-000000000002"),new Week(clock.Current().Date),"P2"),
+                new (Guid.Parse("00000000-0000-0000-0000-000000000003"),new Week(clock.Current().Date),"P3"),
+                new (Guid.Parse("00000000-0000-0000-0000-000000000004"),new Week(clock.Current().Date),"P4"),
+                new (Guid.Parse("00000000-0000-0000-0000-000000000005"),new Week(clock.Current().Date),"P5"),
             };
         }
 
-
+        public async Task<IEnumerable<WeeklyParkingSpot>> GetByWeekAsync(Week week)
+        {
+            var result = _weeklyParkingSpots.Where(x => x.Week == week);
+            return await Task.FromResult(result);
+        }
         public Task AddAsync(WeeklyParkingSpot parkingSpot)
         {
             _weeklyParkingSpots.Add(parkingSpot);

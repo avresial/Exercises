@@ -19,8 +19,8 @@ internal sealed class RegularEmployeeReservationPolicy : IReservationPolicy
     {
         var totalEmployeeReservations = weeklyParkingSpots
             .SelectMany(spot => spot.Reservations)
+            .OfType<VehicleReservation>()
             .Count(reservation => reservation.EmployeeName == employeeName);
-
-        return totalEmployeeReservations < 2 && _clock.Current().Value.Hour > 4;
+        return totalEmployeeReservations < 2 && _clock.Current().Hour > 4;
     }
 }

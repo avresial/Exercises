@@ -17,7 +17,7 @@ namespace MySpot.Infrastructure.DAL
             builder.Property(x => x.Name)
                .HasConversion(x => x.Value, x => new ParkingSpotName(x));
 
-            builder.Property(x => x.week)
+            builder.Property(x => x.Week)
              .HasConversion(x => x.To.Value, x => new Week(x));
         }
 

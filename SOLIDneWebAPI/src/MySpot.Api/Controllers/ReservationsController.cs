@@ -34,10 +34,10 @@ namespace MySpot.Api.Controllers
             return Ok(reservation);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Post(CreateReservationParkingSpot command)
+        [HttpPost("vehicle")]
+        public async Task<ActionResult> Post(ReserveParkingSpotForVehicle command)
         {
-            var id = await service.CreateAsync(command with { ReservationId = Guid.NewGuid() });
+            var id = await service.ReserveForVehicleAsync(command with { ReservationId = Guid.NewGuid() });
 
             if (id is null)
                 return BadRequest();
@@ -45,10 +45,18 @@ namespace MySpot.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = command.ReservationId }, null);
         }
 
+        [HttpPost("cleaning")]
+        public async Task<ActionResult> Post(ReserveParkingSpotForCleaning command)
+        {
+            await service.ReserveForCleaningAsync(command);
+            return Ok();
+        }
+
+
         [HttpPut("{id:guid}")]
         public async Task<ActionResult> Put(Guid id, ChangeReservationLicensePlate commmand)
         {
-            if (!await service.UpdateAsync(commmand with { ReservationId = id }))
+            if (!await service.ChangeReservationLicensePlateAsync(commmand with { ReservationId = id }))
                 return NotFound();
 
             return NoContent();

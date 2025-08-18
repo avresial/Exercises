@@ -16,7 +16,19 @@ internal sealed class ParkingReservationService : IParkingReservationService
         _clock = clock;
     }
 
-    public void ReserveSpotForVehicle(IEnumerable<WeeklyParkingSpot> allParkingSpots, JobTitle jobTitle, WeeklyParkingSpot parkingSpotToReserve, Reservation reservation)
+    public void ReserveParkingForCleaning(IEnumerable<WeeklyParkingSpot> allParkingSpots, Date date)
+    {
+        foreach (var parkingSpot in allParkingSpots)
+        {
+            var reservationsForSameDate = parkingSpot.Reservations.Where(x => x.Date == date);
+            parkingSpot.RemoveReservations(reservationsForSameDate);
+
+            var cleaningReservation = new CleaningReservation(ReservationId.Create(), parkingSpot.Id, date);
+            parkingSpot.AddReservation(cleaningReservation, new(_clock.Current()));
+        }
+    }
+
+    public void ReserveSpotForVehicle(IEnumerable<WeeklyParkingSpot> allParkingSpots, JobTitle jobTitle, WeeklyParkingSpot parkingSpotToReserve, VehicleReservation reservation)
     {
         var parkingSpotId = parkingSpotToReserve.Id;
         var policy = _policies.SingleOrDefault(p => p.CanBeApplied(jobTitle));
@@ -26,6 +38,6 @@ internal sealed class ParkingReservationService : IParkingReservationService
         if (policy.CanReserve(allParkingSpots, reservation.EmployeeName) is false)
             throw new CannotReserveParkingSpotException(parkingSpotId);
 
-        parkingSpotToReserve.AddReservation(reservation, _clock.Current());
+        parkingSpotToReserve.AddReservation(reservation, new(_clock.Current()));
     }
 }
