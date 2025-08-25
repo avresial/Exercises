@@ -40,7 +40,7 @@ namespace MySpot.Application.Services
             var parkingSpotToReserve = weeklyParkingSpots.SingleOrDefault(x => x.Id == parkingSpotId);
             if (parkingSpotToReserve is null) return default;
 
-            var reservation = new VehicleReservation(command.ReservationId, command.ParkingSpotId, command.EmployeeName, command.LicensePlate, (DateTimeOffset)command.date);
+            var reservation = new VehicleReservation(command.ReservationId, command.ParkingSpotId, command.EmployeeName, command.LicensePlate, command.Capacity, (DateTimeOffset)command.date);
             _parkingReservationService.ReserveSpotForVehicle(weeklyParkingSpots, jobTitle, parkingSpotToReserve, reservation);
 
             await _weeklyParkingSpots.UpdateAsync(parkingSpotToReserve);
