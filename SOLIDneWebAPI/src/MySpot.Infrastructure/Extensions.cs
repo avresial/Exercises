@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MySpot.Application.Abstractions;
 using MySpot.Core.Services;
 using MySpot.Infrastructure.DAL;
 using MySpot.Infrastructure.Exceptions;
@@ -21,6 +22,14 @@ namespace MySpot.Infrastructure
                 .AddPostgress(configuration)
                 .AddHostedService<DatabaseInitializer>()
                 ;
+
+            var assemblies = typeof(AppOptions).Assembly;
+
+            services.Scan(s => s
+                .FromAssemblies(assemblies)
+                .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime());
 
             return services;
         }
