@@ -5,24 +5,25 @@
 GET {{url}}
 
 ###
-GET {{url}}/reservations
+GET {{url}}/parking-spots/reservations
 
 ###
-GET {{url}}/reservations/{{reservationId}}
+GET {{url}}/parking-spots/reservations/{{reservationId}}
 
 ###
-Post {{url}}/Reservations/Vehicle
+Post {{url}}/parking-spots/reservations/vehicle
 Content-Type: application/json
 
 {
     "parkingSpotId":"{{parkingSpotId}}",
     "EmployeeName": "John Doe",
+    "Capacity": 1,
     "LicensePlate": "XYZ123",
     "date": "2025-08-05"
 }
 
 ###
-Post {{url}}/Reservations/Cleaning
+Post {{url}}/parking-spots/reservations/Cleaning
 Content-Type: application/json
 
 {
@@ -30,7 +31,7 @@ Content-Type: application/json
 }
 
 ###
-PUT {{url}}/Reservations/{{reservationId}}
+PUT {{url}}parking-spots/reservations/{{reservationId}}
 Content-Type: application/json
 
 {
@@ -38,7 +39,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{url}}/Reservations/{{reservationId}}
+DELETE {{url}}parking-spots/reservations/{{reservationId}}
 Content-Type: application/json
 
 {
