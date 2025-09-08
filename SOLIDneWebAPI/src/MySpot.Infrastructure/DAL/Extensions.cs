@@ -5,6 +5,7 @@ using MySpot.Application.Abstractions;
 using MySpot.Core.Repositories;
 using MySpot.Infrastructure.DAL.Decorators;
 using MySpot.Infrastructure.DAL.Repositories;
+using MySpot.Infrastructure.Logging.Decorators;
 
 namespace MySpot.Infrastructure.DAL
 {

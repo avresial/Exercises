@@ -5,6 +5,7 @@ using MySpot.Application.Abstractions;
 using MySpot.Core.Services;
 using MySpot.Infrastructure.DAL;
 using MySpot.Infrastructure.Exceptions;
+using MySpot.Infrastructure.Logging.Decorators;
 using MySpot.Infrastructure.Time;
 
 namespace MySpot.Infrastructure
@@ -21,6 +22,7 @@ namespace MySpot.Infrastructure
                 .AddSingleton<IClock, Clock>()
                 .AddPostgress(configuration)
                 .AddHostedService<DatabaseInitializer>()
+                .AddCustomLogging()
                 ;
 
             var assemblies = typeof(AppOptions).Assembly;
