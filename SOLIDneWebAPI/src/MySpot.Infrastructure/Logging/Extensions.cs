@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using MySpot.Application.Abstractions;
+using MySpot.Infrastructure.Logging;
+using MySpot.Infrastructure.Logging.Decorators;
 using Serilog;
 
-namespace MySpot.Infrastructure.Logging.Decorators;
+namespace MySpot.Infrastructure.Logging;
 public static class Extensions
 {
     internal static IServiceCollection AddCustomLogging(this IServiceCollection services)

@@ -5,7 +5,8 @@ using MySpot.Application.Abstractions;
 using MySpot.Core.Services;
 using MySpot.Infrastructure.DAL;
 using MySpot.Infrastructure.Exceptions;
-using MySpot.Infrastructure.Logging.Decorators;
+using MySpot.Infrastructure.Logging;
+using MySpot.Infrastructure.Security;
 using MySpot.Infrastructure.Time;
 
 namespace MySpot.Infrastructure
@@ -16,10 +17,11 @@ namespace MySpot.Infrastructure
         {
             var section = configuration.GetSection("App");
             services.Configure<AppOptions>(section);
-            services.AddSingleton<ExceptionMiddleware>();
 
             services
+                .AddSingleton<ExceptionMiddleware>()
                 .AddSingleton<IClock, Clock>()
+                .AddSecurity()
                 .AddPostgress(configuration)
                 .AddHostedService<DatabaseInitializer>()
                 .AddCustomLogging()
