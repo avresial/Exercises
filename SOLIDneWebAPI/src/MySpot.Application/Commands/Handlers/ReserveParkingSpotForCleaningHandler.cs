@@ -22,7 +22,7 @@ internal class ReserveParkingSpotForCleaningHandler : ICommandHandler<ReservePar
 
         _parkingReservationService.ReserveParkingForCleaning(weeklyParkingSpots, new(command.Date));
 
-        foreach (var parkingSpots in weeklyParkingSpots)
-            await _weeklyParkingSpots.UpdateAsync(parkingSpots);
+        var tasks = weeklyParkingSpots.Select(x => _weeklyParkingSpots.UpdateAsync(x));
+        await Task.WhenAll(tasks);
     }
 }
