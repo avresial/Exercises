@@ -4,6 +4,7 @@ using MySpot.Application.Abstractions;
 using MySpot.Application.Commands;
 using MySpot.Application.Dtos;
 using MySpot.Application.Queries;
+using MySpot.Application.Security;
 
 namespace MySpot.Api.Controllers;
 
@@ -15,20 +16,20 @@ public class UsersController : ControllerBase
     private readonly IQueryHandler<GetUser, UserDto> _getUserHandler;
     private readonly ICommandHandler<SignUp> _signUpHandler;
     private readonly ICommandHandler<SignIn> _signInHandler;
-    //private readonly ITokenStorage _tokenStorage;
+    private readonly ITokenStorage _tokenStorage;
 
     public UsersController(ICommandHandler<SignUp> signUpHandler,
         ICommandHandler<SignIn> signInHandler,
         IQueryHandler<GetUsers, IEnumerable<UserDto>> getUsersHandler,
-        IQueryHandler<GetUser, UserDto> getUserHandler
-        //ITokenStorage tokenStorage
+        IQueryHandler<GetUser, UserDto> getUserHandler,
+        ITokenStorage tokenStorage
         )
     {
         _signUpHandler = signUpHandler;
         _signInHandler = signInHandler;
         _getUsersHandler = getUsersHandler;
         _getUserHandler = getUserHandler;
-        //_tokenStorage = tokenStorage;
+        _tokenStorage = tokenStorage;
     }
 
     [Authorize(Policy = "is-admin")]
@@ -83,14 +84,14 @@ public class UsersController : ControllerBase
         return CreatedAtAction(nameof(Get), new { command.UserId }, null);
     }
 
-    //[HttpPost("sign-in")]
+    [HttpPost("sign-in")]
     //[SwaggerOperation("Sign in the user and return the JSON Web Token")]
-    //[ProducesResponseType(StatusCodes.Status200OK)]
-    //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-    //public async Task<ActionResult<JwtDto>> Post(SignIn command)
-    //{
-    //    await _signInHandler.HandleAsync(command);
-    //    var jwt = _tokenStorage.Get();
-    //    return jwt;
-    //}
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<JwtDto>> Post(SignIn command)
+    {
+        await _signInHandler.HandleAsync(command);
+        var jwt = _tokenStorage.Get();
+        return jwt;
+    }
 }
