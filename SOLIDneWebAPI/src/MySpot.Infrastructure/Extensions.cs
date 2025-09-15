@@ -28,6 +28,16 @@ namespace MySpot.Infrastructure
                 .AddPostgress(configuration)
                 .AddHostedService<DatabaseInitializer>()
                 .AddCustomLogging()
+                .AddEndpointsApiExplorer()
+                .AddSwaggerGen(swagger =>
+                {
+                    swagger.EnableAnnotations();
+                    swagger.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "My spot API",
+                        Version = "v1"
+                    });
+                })
                 ;
 
             var assemblies = typeof(AppOptions).Assembly;
@@ -44,6 +54,14 @@ namespace MySpot.Infrastructure
         public static WebApplication UseInfrastructure(this WebApplication app)
         {
             app.UseMiddleware<ExceptionMiddleware>();
+            app.UseSwagger();
+            app.UseReDoc(ReDoc =>
+            {
+                ReDoc.RoutePrefix = "docs";
+                ReDoc.DocumentTitle = "Myspot.Api";
+                ReDoc.SpecUrl = "/swagger/v1/swagger.json";
+            });
+            app.UseSwaggerUI();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
