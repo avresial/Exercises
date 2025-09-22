@@ -29,15 +29,6 @@ namespace MySpot.Infrastructure.DAL
             return services;
         }
 
-        public static T GetOptions<T>(this IConfiguration configuration, string sectionName) where T : class, new()
-        {
-            var section = configuration.GetSection(sectionName);
 
-            if (section == null) throw new ArgumentException($"Configuration section '{sectionName}' not found.");
-
-            var options = new T();
-            section.Bind(options);
-            return options;
-        }
     }
 }
