@@ -38,9 +38,9 @@ public class UsersControllerTests : ControllerTests, IDisposable
         var user = new User(Guid.NewGuid(), "test-user1@myspot.io",
             "test-user1", passwordManager.Secure(password), "Test Doe", Role.User(), clock.Current());
         await _userRepository.AddAsync(user);
-        // await _testDatabase.Context.Database.MigrateAsync();
-        // await _testDatabase.Context.Users.AddAsync(user);
-        // await _testDatabase.Context.SaveChangesAsync();
+        await _testDatabase.Context.Database.MigrateAsync();
+        await _testDatabase.Context.Users.AddAsync(user);
+        await _testDatabase.Context.SaveChangesAsync();
 
         // Act
         var command = new SignIn(user.Email, password);
@@ -85,8 +85,8 @@ public class UsersControllerTests : ControllerTests, IDisposable
 
     protected override void ConfigureServices(IServiceCollection services)
     {
-        _userRepository = new TestUserRepository();
-        services.AddSingleton(_userRepository);
+        //_userRepository = new TestUserRepository();
+        //services.AddSingleton(_userRepository);
     }
 
     public void Dispose()
