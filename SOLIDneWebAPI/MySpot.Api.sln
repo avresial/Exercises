@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySpot.Infrastructure", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySpot.Tests.Unit", "src\MySpot.Tests.Unit\MySpot.Tests.Unit.csproj", "{C2BEA7AF-A793-4961-86A6-1BA38981757F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Tests.Integration", "src\MySpot.Tests.Integration\MySpot.Tests.Integration.csproj", "{9E887C71-4386-44E6-A455-12EA0F6DB6C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,12 +50,17 @@ Global
 		{C2BEA7AF-A793-4961-86A6-1BA38981757F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2BEA7AF-A793-4961-86A6-1BA38981757F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2BEA7AF-A793-4961-86A6-1BA38981757F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E887C71-4386-44E6-A455-12EA0F6DB6C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E887C71-4386-44E6-A455-12EA0F6DB6C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E887C71-4386-44E6-A455-12EA0F6DB6C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E887C71-4386-44E6-A455-12EA0F6DB6C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C2BEA7AF-A793-4961-86A6-1BA38981757F} = {80C33110-F535-4E61-9615-2BBBA09F276A}
+		{9E887C71-4386-44E6-A455-12EA0F6DB6C8} = {80C33110-F535-4E61-9615-2BBBA09F276A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77FCE0E3-3EBE-4432-8ABA-B121C818DF8E}
