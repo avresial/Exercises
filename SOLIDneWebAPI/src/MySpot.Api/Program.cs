@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Options;
+using MySpot.Api;
 using MySpot.Application;
 using MySpot.Infrastructure;
 using MySpot.Infrastructure.Logging;
@@ -15,5 +17,6 @@ builder.UseSerilog();
 var app = builder.Build();
 
 app.UseInfrastructure();
-
+app.MapGet("api", (IOptions<AppOptions> options) => Results.Ok(options.Value.Name));
+app.UseUsersApi();
 app.Run();

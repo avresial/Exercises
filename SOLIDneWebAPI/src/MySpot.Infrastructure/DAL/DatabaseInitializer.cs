@@ -16,6 +16,7 @@ internal class DatabaseInitializer : IHostedService
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
+        //return Task.CompletedTask;
         using (var scope = _serviceProvider.CreateScope())
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<MySpotDbContext>();

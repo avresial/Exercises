@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MySpot.Application.Abstractions;
 using MySpot.Core.Services;
+using MySpot.Infrastructure.Auth;
 using MySpot.Infrastructure.DAL;
 using MySpot.Infrastructure.Exceptions;
 using MySpot.Infrastructure.Logging;
@@ -19,12 +20,24 @@ namespace MySpot.Infrastructure
             services.Configure<AppOptions>(section);
 
             services
+                .AddAuth(configuration)
+                .AddHttpContextAccessor()
                 .AddSingleton<ExceptionMiddleware>()
                 .AddSingleton<IClock, Clock>()
                 .AddSecurity()
                 .AddPostgress(configuration)
                 .AddHostedService<DatabaseInitializer>()
                 .AddCustomLogging()
+                .AddEndpointsApiExplorer()
+                .AddSwaggerGen(swagger =>
+                {
+                    swagger.EnableAnnotations();
+                    swagger.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "My spot API",
+                        Version = "v1"
+                    });
+                })
                 ;
 
             var assemblies = typeof(AppOptions).Assembly;
@@ -41,9 +54,30 @@ namespace MySpot.Infrastructure
         public static WebApplication UseInfrastructure(this WebApplication app)
         {
             app.UseMiddleware<ExceptionMiddleware>();
+            app.UseSwagger();
+            app.UseReDoc(ReDoc =>
+            {
+                ReDoc.RoutePrefix = "docs";
+                ReDoc.DocumentTitle = "Myspot.Api";
+                ReDoc.SpecUrl = "/swagger/v1/swagger.json";
+            });
+            app.UseSwaggerUI();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
 
             return app;
+        }
+
+        public static T GetOptions<T>(this IConfiguration configuration, string sectionName) where T : class, new()
+        {
+            var section = configuration.GetSection(sectionName);
+
+            if (section == null) throw new ArgumentException($"Configuration section '{sectionName}' not found.");
+
+            var options = new T();
+            section.Bind(options);
+            return options;
         }
     }
 }
