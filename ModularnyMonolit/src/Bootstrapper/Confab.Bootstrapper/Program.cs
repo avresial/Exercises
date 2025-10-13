@@ -1,4 +1,6 @@
 
+using Confab.Modules.Conferences.Api;
+using Confab.Shared.Infrastructure;
 namespace Confab.Bootstrapper;
 
 public class Program
@@ -8,8 +10,9 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         builder.AddServiceDefaults();
 
-        builder.Services.AddControllers();
+        builder.Services.AddInfrastructure();
         builder.Services.AddOpenApi();
+        builder.Services.AddConferences();
 
         var app = builder.Build();
 
@@ -18,9 +21,8 @@ public class Program
         if (app.Environment.IsDevelopment())
             app.MapOpenApi();
 
-        app.UseHttpsRedirection();
-        app.UseAuthorization();
-        app.MapControllers();
+
+        app.UseInfrastructure();
         app.MapGet("/", (context) => context.Response.WriteAsync("Confab Api!"));
         app.Run();
     }
