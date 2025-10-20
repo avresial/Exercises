@@ -1,4 +1,6 @@
-﻿using Confab.Shared.Infrastructure.Api;
+﻿using Confab.Shared.Abstractions.Time;
+using Confab.Shared.Infrastructure.Api;
+using Confab.Shared.Infrastructure.Time;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +16,7 @@ public static class Extensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
+        services.AddSingleton<IClock, UtcClock>();
         var disabledModules = new List<string>();
         using (var serviceProvider = services.BuildServiceProvider())
         {
