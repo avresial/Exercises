@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives; // Add this using directive
 
 namespace Confab.Modules.Conferences.Api.Controllers;
 
@@ -15,5 +16,8 @@ internal class BaseController : ControllerBase
         return Ok(model);
     }
 
-    protected void AddResourceIdHeader(Guid id) => Response.Headers.Add("Resource-ID", id.ToString());
+    protected void AddResourceIdHeader(Guid id)
+    {
+        Response.Headers["Resource-ID"] = new StringValues(id.ToString());
+    }
 }

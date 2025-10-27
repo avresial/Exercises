@@ -20,7 +20,7 @@ internal static class Extensions
         services.AddSingleton<IConferenceDeletionPolicy, ConferenceDeletionPolicy>();
         services.AddSingleton<IConferenceRepository, InMemoryConferenceRepository>();
         //services.AddScoped<IConferenceRepository, ConferenceRepository>();
-        //services.AddScoped<IConferenceService, ConferenceService>();
+        services.AddScoped<IConferenceService, ConferenceService>();
 
         return services;
     }
