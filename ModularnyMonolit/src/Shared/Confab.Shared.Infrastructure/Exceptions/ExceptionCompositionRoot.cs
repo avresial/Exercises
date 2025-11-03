@@ -5,7 +5,7 @@ namespace Confab.Shared.Infrastructure.Exceptions;
 
 internal class ExceptionCompositionRoot(IServiceProvider serviceProvider) : IExceptionCompositionRoot
 {
-    public ExceptionResponse Map(Exception exception)
+    public ExceptionResponse? Map(Exception exception)
     {
         using var scope = serviceProvider.CreateScope();
         var mappers = scope.ServiceProvider.GetServices<IExceptionToResponseMapper>().ToArray();
@@ -15,9 +15,7 @@ internal class ExceptionCompositionRoot(IServiceProvider serviceProvider) : IExc
             .SingleOrDefault(x => x is not null);
 
         if (result is not null)
-        {
             return result;
-        }
 
         var defaultMapper = mappers.SingleOrDefault(x => x is ExceptionToResponseMapper);
 
