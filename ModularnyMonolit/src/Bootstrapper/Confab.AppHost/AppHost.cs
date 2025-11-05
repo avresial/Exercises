@@ -1,10 +1,7 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-//var username = builder.AddParameter("postgres", secret: true);
-//var password = builder.AddParameter("secret", secret: true);
-
-var postgres = builder.AddPostgres("pd").WithPgAdmin();
-var postgresdb = postgres.AddDatabase("postgresdb");
+var postgres = builder.AddPostgres("postgres").WithPgAdmin();
+var postgresdb = postgres.WithDataVolume().AddDatabase("ConfabDb");
 
 builder.AddProject<Projects.Confab_Bootstrapper>("confab-bootstrapper")
     .WithReference(postgresdb);
