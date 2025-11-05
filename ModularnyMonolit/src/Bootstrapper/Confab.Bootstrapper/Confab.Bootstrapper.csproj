@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="appsettings.test.Development.json" />
+    <Content Remove="appsettings.test.json" />
     <Content Remove="Properties\launchSettings.development.json" />
   </ItemGroup>
 
@@ -22,6 +24,13 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.test.Development.json" />
+    <None Include="appsettings.test.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
