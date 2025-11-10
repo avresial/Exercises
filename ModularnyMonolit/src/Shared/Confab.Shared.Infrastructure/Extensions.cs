@@ -1,12 +1,15 @@
-﻿using Confab.Shared.Abstractions.Time;
+﻿using Confab.Shared.Abstractions.Modules;
+using Confab.Shared.Abstractions.Time;
 using Confab.Shared.Infrastructure.Api;
 using Confab.Shared.Infrastructure.Exceptions;
 using Confab.Shared.Infrastructure.Time;
+using Convey;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Confab.Bootstrapper")]
@@ -16,7 +19,7 @@ using System.Runtime.CompilerServices;
 namespace Confab.Shared.Infrastructure;
 public static class Extensions
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IList<Assembly> assemblies, IList<IModule> modules)
     {
         var disabledModules = new List<string>();
         using (var serviceProvider = services.BuildServiceProvider())
@@ -92,33 +95,32 @@ public static class Extensions
                 manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
             });
 
-        //services
-        //    .AddConvey()
-        //    .AddRabbitMq()
-        //    .Build();
+        services
+            .AddConvey()
+            //.AddRabbitMq()
+            .Build();
 
         return services;
     }
-
-    public static IApplicationBuilder UseInfrastructure(this WebApplication app)
+    public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
         //app.UseCors(CorsPolicy);
         app.UseErrorHandling();
-        //app.UseSwagger();
-        //app.UseReDoc(reDoc =>
-        //{
-        //    reDoc.RoutePrefix = "docs";
-        //    reDoc.SpecUrl("/swagger/v1/swagger.json");
-        //    reDoc.DocumentTitle = "Confab API";
-        //});
-        app.UseHttpsRedirection();
+        app.UseSwagger();
+        app.UseReDoc(reDoc =>
+        {
+            reDoc.RoutePrefix = "docs";
+            reDoc.SpecUrl("/swagger/v1/swagger.json");
+            reDoc.DocumentTitle = "Confab API";
+        });
         app.UseAuthentication();
         app.UseRouting();
         app.UseAuthorization();
-        app.MapControllers();
 
         return app;
     }
+
+
     public static T GetOptions<T>(this IServiceCollection services, string sectionName) where T : new()
     {
         using var serviceProvider = services.BuildServiceProvider();
@@ -147,5 +149,4 @@ public static class Extensions
             ? type.Namespace.Split(".")[2].ToLowerInvariant()
             : string.Empty;
     }
-
 }
