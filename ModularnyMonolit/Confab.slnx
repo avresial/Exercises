@@ -1,0 +1,25 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Confab.rest" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/bootstrapper/">
+    <Project Path="src/Bootstrapper/Confab.AppHost/Confab.AppHost.csproj" />
+    <Project Path="src/Bootstrapper/Confab.Bootstrapper/Confab.Bootstrapper.csproj" />
+    <Project Path="src/Bootstrapper/Confab.ServiceDefaults/Confab.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/modules/" />
+  <Folder Name="/src/modules/Conferences/">
+    <Project Path="src/Modules/Conferences/Confab.Modules.Conferences.Api/Confab.Modules.Conferences.Api.csproj" />
+    <Project Path="src/Modules/Conferences/Confab.Modules.Conferences.Core/Confab.Modules.Conferences.Core.csproj" />
+  </Folder>
+  <Folder Name="/src/modules/Speakers/">
+    <Project Path="src/Modules/Speakers/Confab.Modules.Speakers.Api/Confab.Modules.Speakers.Api.csproj" />
+    <Project Path="src/Modules/Speakers/Confab.Modules.Speakers.Core/Confab.Modules.Speakers.Core.csproj" />
+  </Folder>
+  <Folder Name="/src/shared/">
+    <Project Path="src/Shared/Confab.Shared.Abstractions/Confab.Shared.Abstractions.csproj" />
+    <Project Path="src/Shared/Confab.Shared.Infrastructure/Confab.Shared.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/test/" />
+</Solution>
