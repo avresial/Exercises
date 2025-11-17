@@ -2,6 +2,7 @@
 using Confab.Shared.Abstractions.Time;
 using Confab.Shared.Infrastructure.Api;
 using Confab.Shared.Infrastructure.Exceptions;
+using Confab.Shared.Infrastructure.Modules;
 using Confab.Shared.Infrastructure.Time;
 using Convey;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -17,8 +19,10 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Confab.Shared.Tests")]
 
 namespace Confab.Shared.Infrastructure;
+
 public static class Extensions
 {
+    public const string CorsPolicy = "CorsPolicy";
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IList<Assembly> assemblies, IList<IModule> modules)
     {
         var disabledModules = new List<string>();
@@ -39,31 +43,31 @@ public static class Extensions
             }
         }
 
-        //services.AddCors(cors =>
-        //{
-        //    cors.AddPolicy(CorsPolicy, x =>
-        //    {
-        //        x.WithOrigins("*")
-        //            .WithMethods("POST", "PUT", "DELETE")
-        //            .WithHeaders("Content-Type", "Authorization");
-        //    });
-        //});
-        //services.AddSwaggerGen(swagger =>
-        //{
-        //    swagger.CustomSchemaIds(x => x.FullName);
-        //    swagger.SwaggerDoc("v1", new OpenApiInfo
-        //    {
-        //        Title = "Confab API",
-        //        Version = "v1"
-        //    });
-        //});
+        services.AddCors(cors =>
+        {
+            cors.AddPolicy(CorsPolicy, x =>
+            {
+                x.WithOrigins("*")
+                    .WithMethods("POST", "PUT", "DELETE")
+                    .WithHeaders("Content-Type", "Authorization");
+            });
+        });
+        services.AddSwaggerGen(swagger =>
+        {
+            swagger.CustomSchemaIds(x => x.FullName);
+            swagger.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Confab API",
+                Version = "v1"
+            });
+        });
 
         services.AddMemoryCache();
         //services.AddSingleton<IRequestStorage, RequestStorage>();
         //services.AddSingleton<IContextFactory, ContextFactory>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         //services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
-        //services.AddModuleInfo(modules);
+        services.AddModuleInfo(modules);
         //services.AddModuleRequests(assemblies);
         //services.AddAuth(modules);
         services.AddErrorHandling();
@@ -104,7 +108,7 @@ public static class Extensions
     }
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
-        //app.UseCors(CorsPolicy);
+        app.UseCors(CorsPolicy);
         app.UseErrorHandling();
         app.UseSwagger();
         app.UseReDoc(reDoc =>

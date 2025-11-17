@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Confab.Shared.Infrastructure.Api;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives; // Add this using directive
 
 namespace Confab.Modules.Conferences.Api.Controllers;
 
 [ApiController]
-//[ProducesDefaultContentType]
+[ProducesDefaultContentType]
 [Route(ConferencesModule.BasePath + "/[controller]")]
 internal class BaseController : ControllerBase
 {
