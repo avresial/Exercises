@@ -1,5 +1,6 @@
 ﻿using Confab.Shared.Abstractions.Modules;
 using Confab.Shared.Infrastructure;
+using Confab.Shared.Infrastructure.Modules;
 using Convey;
 using System.Reflection;
 
@@ -35,7 +36,7 @@ public class Startup
         {
             endpoints.MapControllers();
             endpoints.MapGet("/", context => context.Response.WriteAsync("Confab API!"));
-            //endpoints.MapModuleInfo();
+            endpoints.MapModuleInfo();
         });
 
         app.UseConvey();
