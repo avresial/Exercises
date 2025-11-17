@@ -17,6 +17,10 @@
     <Project Path="src/Modules/Speakers/Confab.Modules.Speakers.Api/Confab.Modules.Speakers.Api.csproj" />
     <Project Path="src/Modules/Speakers/Confab.Modules.Speakers.Core/Confab.Modules.Speakers.Core.csproj" />
   </Folder>
+  <Folder Name="/src/modules/Users/">
+    <Project Path="src/Modules/Users/Confab.Modules.Users.Api/Confab.Modules.Users.Api.csproj" />
+    <Project Path="src/Modules/Users/Confab.Modules.Users.Core/Confab.Modules.Users.Core.csproj" />
+  </Folder>
   <Folder Name="/src/shared/">
     <Project Path="src/Shared/Confab.Shared.Abstractions/Confab.Shared.Abstractions.csproj" />
     <Project Path="src/Shared/Confab.Shared.Infrastructure/Confab.Shared.Infrastructure.csproj" />
