@@ -1,6 +1,7 @@
 ﻿using Confab.Shared.Abstractions.Modules;
 using Confab.Shared.Abstractions.Time;
 using Confab.Shared.Infrastructure.Api;
+using Confab.Shared.Infrastructure.Contexts;
 using Confab.Shared.Infrastructure.Exceptions;
 using Confab.Shared.Infrastructure.Modules;
 using Confab.Shared.Infrastructure.Time;
@@ -64,9 +65,9 @@ public static class Extensions
 
         services.AddMemoryCache();
         //services.AddSingleton<IRequestStorage, RequestStorage>();
-        //services.AddSingleton<IContextFactory, ContextFactory>();
+        services.AddSingleton<IContextFactory, ContextFactory>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        //services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
+        services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
         services.AddModuleInfo(modules);
         //services.AddModuleRequests(assemblies);
         //services.AddAuth(modules);
