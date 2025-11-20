@@ -2,6 +2,7 @@
 using Confab.Shared.Abstractions.Time;
 using Confab.Shared.Infrastructure.Api;
 using Confab.Shared.Infrastructure.Contexts;
+using Confab.Shared.Infrastructure.Events;
 using Confab.Shared.Infrastructure.Exceptions;
 using Confab.Shared.Infrastructure.Modules;
 using Confab.Shared.Infrastructure.Time;
@@ -74,7 +75,7 @@ public static class Extensions
         services.AddErrorHandling();
         //services.AddCommands(assemblies);
         //services.AddQueries(assemblies);
-        //services.AddEvents(assemblies);
+        services.AddEvents(assemblies);
         //services.AddDomainEvents(assemblies);
         //services.AddMessaging();
         //services.AddPostgres();
