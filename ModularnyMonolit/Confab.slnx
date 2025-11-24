@@ -9,6 +9,12 @@
     <Project Path="src/Bootstrapper/Confab.ServiceDefaults/Confab.ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/src/modules/" />
+  <Folder Name="/src/modules/Agendas/">
+    <Project Path="src/Modules/Agendas/Confab.Modules.Agendas.Api/Confab.Modules.Agendas.Api.csproj" />
+    <Project Path="src/Modules/Agendas/Confab.Modules.Agendas.Application/Confab.Modules.Agendas.Application.csproj" />
+    <Project Path="src/Modules/Agendas/Confab.Modules.Agendas.Domain/Confab.Modules.Agendas.Domain.csproj" />
+    <Project Path="src/Modules/Agendas/Confab.Modules.Agendas.Infrastructure/Confab.Modules.Agendas.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/modules/Conferences/">
     <Project Path="src/Modules/Conferences/Confab.Modules.Conferences.Api/Confab.Modules.Conferences.Api.csproj" />
     <Project Path="src/Modules/Conferences/Confab.Modules.Conferences.Core/Confab.Modules.Conferences.Core.csproj" />
@@ -16,6 +22,10 @@
   <Folder Name="/src/modules/Speakers/">
     <Project Path="src/Modules/Speakers/Confab.Modules.Speakers.Api/Confab.Modules.Speakers.Api.csproj" />
     <Project Path="src/Modules/Speakers/Confab.Modules.Speakers.Core/Confab.Modules.Speakers.Core.csproj" />
+  </Folder>
+  <Folder Name="/src/modules/Tickets/">
+    <Project Path="src/Modules/Tickets/Confab.Modules.Tickets.Api/Confab.Modules.Tickets.Api.csproj" />
+    <Project Path="src/Modules/Tickets/Confab.Modules.Tickets.Core/Confab.Modules.Tickets.Core.csproj" />
   </Folder>
   <Folder Name="/src/modules/Users/">
     <Project Path="src/Modules/Users/Confab.Modules.Users.Api/Confab.Modules.Users.Api.csproj" />
