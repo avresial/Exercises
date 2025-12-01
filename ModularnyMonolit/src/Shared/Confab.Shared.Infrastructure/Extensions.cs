@@ -1,10 +1,12 @@
 ﻿using Confab.Shared.Abstractions.Modules;
 using Confab.Shared.Abstractions.Time;
 using Confab.Shared.Infrastructure.Api;
+using Confab.Shared.Infrastructure.Commands;
 using Confab.Shared.Infrastructure.Contexts;
 using Confab.Shared.Infrastructure.Events;
 using Confab.Shared.Infrastructure.Exceptions;
 using Confab.Shared.Infrastructure.Modules;
+using Confab.Shared.Infrastructure.Queries;
 using Confab.Shared.Infrastructure.Time;
 using Convey;
 using Microsoft.AspNetCore.Builder;
@@ -73,8 +75,8 @@ public static class Extensions
         //services.AddModuleRequests(assemblies);
         //services.AddAuth(modules);
         services.AddErrorHandling();
-        //services.AddCommands(assemblies);
-        //services.AddQueries(assemblies);
+        services.AddCommands(assemblies);
+        services.AddQueries(assemblies);
         services.AddEvents(assemblies);
         //services.AddDomainEvents(assemblies);
         //services.AddMessaging();
