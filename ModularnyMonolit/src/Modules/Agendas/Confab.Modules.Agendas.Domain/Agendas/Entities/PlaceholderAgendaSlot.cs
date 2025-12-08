@@ -2,39 +2,38 @@
 using Confab.Modules.Agendas.Domain.Agendas.Exceptions;
 using Confab.Shared.Abstractions.Kernel.Types;
 
-namespace Confab.Modules.Agendas.Domain.Agendas.Entities
+namespace Confab.Modules.Agendas.Domain.Agendas.Entities;
+
+public sealed class PlaceholderAgendaSlot : AgendaSlot
 {
-    public sealed class PlaceholderAgendaSlot : AgendaSlot
+    public string Placeholder { get; private set; }
+
+    public PlaceholderAgendaSlot(EntityId id, DateTime from, DateTime to, string placeholder) : base(id, from, to)
+        => Placeholder = placeholder;
+
+    private PlaceholderAgendaSlot()
     {
-        public string Placeholder { get; private set; }
+    }
+    
+    internal PlaceholderAgendaSlot(EntityId id) : base(id)
+    {
+    }
 
-        public PlaceholderAgendaSlot(EntityId id, DateTime from, DateTime to, string placeholder) : base(id, from, to)
-            => Placeholder = placeholder;
+    internal static PlaceholderAgendaSlot Create(EntityId id, DateTime from, DateTime to)
+    {
+        var placeholderAgendaSlot = new PlaceholderAgendaSlot(id);
+        placeholderAgendaSlot.ChangeDateRange(from, to);
 
-        private PlaceholderAgendaSlot()
+        return placeholderAgendaSlot;
+    }
+
+    public void ChangePlaceholder(string placeholder)
+    {
+        if (string.IsNullOrEmpty(placeholder))
         {
-        }
-        
-        internal PlaceholderAgendaSlot(EntityId id) : base(id)
-        {
+            throw new EmptyAgendaSlotPlaceholderException();
         }
 
-        internal static PlaceholderAgendaSlot Create(EntityId id, DateTime from, DateTime to)
-        {
-            var placeholderAgendaSlot = new PlaceholderAgendaSlot(id);
-            placeholderAgendaSlot.ChangeDateRange(from, to);
-
-            return placeholderAgendaSlot;
-        }
-
-        public void ChangePlaceholder(string placeholder)
-        {
-            if (string.IsNullOrEmpty(placeholder))
-            {
-                throw new EmptyAgendaSlotPlaceholderException();
-            }
-
-            Placeholder = placeholder;
-        }
+        Placeholder = placeholder;
     }
 }

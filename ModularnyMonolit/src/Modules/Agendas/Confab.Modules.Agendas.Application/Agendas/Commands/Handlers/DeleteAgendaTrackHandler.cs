@@ -5,29 +5,28 @@ using Confab.Modules.Agendas.Domain.Agendas.Repositories;
 using Confab.Shared.Abstractions.Commands;
 using Confab.Shared.Abstractions.Messaging;
 
-namespace Confab.Modules.Agendas.Application.Agendas.Commands.Handlers
+namespace Confab.Modules.Agendas.Application.Agendas.Commands.Handlers;
+
+internal class DeleteAgendaTrackHandler : ICommandHandler<DeleteAgendaTrack>
 {
-    internal class DeleteAgendaTrackHandler : ICommandHandler<DeleteAgendaTrack>
+    private readonly IAgendaTracksRepository _repository;
+    private readonly IMessageBroker _messageBroker;
+
+    public DeleteAgendaTrackHandler(IAgendaTracksRepository repository, IMessageBroker messageBroker)
     {
-        private readonly IAgendaTracksRepository _repository;
-        private readonly IMessageBroker _messageBroker;
+        _repository = repository;
+        _messageBroker = messageBroker;
+    }
+    public async Task HandleAsync(DeleteAgendaTrack command)
+    {
+        var agendaTrack = await _repository.GetAsync(command.Id);
 
-        public DeleteAgendaTrackHandler(IAgendaTracksRepository repository, IMessageBroker messageBroker)
+        if (agendaTrack is null)
         {
-            _repository = repository;
-            _messageBroker = messageBroker;
+            throw new AgendaTrackNotFoundException(command.Id);
         }
-        public async Task HandleAsync(DeleteAgendaTrack command)
-        {
-            var agendaTrack = await _repository.GetAsync(command.Id);
-
-            if (agendaTrack is null)
-            {
-                throw new AgendaTrackNotFoundException(command.Id);
-            }
-            
-            await _repository.DeleteAsync(agendaTrack);
-            await _messageBroker.PublishAsync(new AgendaTrackDeleted(command.Id));
-        }
+        
+        await _repository.DeleteAsync(agendaTrack);
+        await _messageBroker.PublishAsync(new AgendaTrackDeleted(command.Id));
     }
 }

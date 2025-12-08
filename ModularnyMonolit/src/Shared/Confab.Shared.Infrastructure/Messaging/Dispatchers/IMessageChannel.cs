@@ -1,11 +1,10 @@
 ﻿using System.Threading.Channels;
 using Confab.Shared.Abstractions.Messaging;
 
-namespace Confab.Shared.Infrastructure.Messaging.Dispatchers
+namespace Confab.Shared.Infrastructure.Messaging.Dispatchers;
+
+public interface IMessageChannel
 {
-    public interface IMessageChannel
-    {
-        ChannelReader<IMessage> Reader { get; }
-        ChannelWriter<IMessage> Writer { get; }
-    }
+    ChannelReader<IMessage> Reader { get; }
+    ChannelWriter<IMessage> Writer { get; }
 }

@@ -1,7 +1,6 @@
-﻿namespace Confab.Shared.Infrastructure.Messaging.Dispatchers
+﻿namespace Confab.Shared.Infrastructure.Messaging.Dispatchers;
+
+public class MessagingOptions
 {
-    public class MessagingOptions
-    {
-        public bool UseBackgroundDispatcher { get; set; }
-    }
+    public bool UseBackgroundDispatcher { get; set; }
 }

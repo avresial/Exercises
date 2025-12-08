@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace Confab.Shared.Abstractions.Kernel
+namespace Confab.Shared.Abstractions.Kernel;
+
+public interface IDomainEventDispatcher
 {
-    public interface IDomainEventDispatcher
-    {
-        Task DispatchAsync(params IDomainEvent[] events);
-    }
+    Task DispatchAsync(params IDomainEvent[] events);
 }

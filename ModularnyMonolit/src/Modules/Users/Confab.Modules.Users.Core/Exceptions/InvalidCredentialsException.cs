@@ -1,11 +1,10 @@
 ﻿using Confab.Shared.Abstractions.Exceptions;
 
-namespace Confab.Modules.Users.Core.Exceptions
+namespace Confab.Modules.Users.Core.Exceptions;
+
+internal class InvalidCredentialsException : ConfabException
 {
-    internal class InvalidCredentialsException : ConfabException
+    public InvalidCredentialsException() : base("Invalid credentials.")
     {
-        public InvalidCredentialsException() : base("Invalid credentials.")
-        {
-        }
     }
 }

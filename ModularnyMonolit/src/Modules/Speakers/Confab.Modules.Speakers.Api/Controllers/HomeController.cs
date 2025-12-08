@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Confab.Modules.Speakers.Api.Controllers
+namespace Confab.Modules.Speakers.Api.Controllers;
+
+[Route(SpeakersModule.BasePath)]
+internal class HomeController : BaseController
 {
-    [Route(SpeakersModule.BasePath)]
-    internal class HomeController : BaseController
-    {
-        [HttpGet]
-        public ActionResult<string> Get() => "Speakers API";
-    }
+    [HttpGet]
+    public ActionResult<string> Get() => "Speakers API";
 }

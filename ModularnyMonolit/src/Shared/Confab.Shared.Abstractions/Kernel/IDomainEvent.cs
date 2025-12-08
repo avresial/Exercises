@@ -1,6 +1,5 @@
-﻿namespace Confab.Shared.Abstractions.Kernel
+﻿namespace Confab.Shared.Abstractions.Kernel;
+
+public interface IDomainEvent
 {
-    public interface IDomainEvent
-    {
-    }
 }

@@ -9,15 +9,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("Confab.Modules.Users.Api")]
-namespace Confab.Modules.Users.Core
+namespace Confab.Modules.Users.Core;
+
+internal static class Extensions
 {
-    internal static class Extensions
-    {
-        public static IServiceCollection AddCore(this IServiceCollection services)
-            => services
-                .AddScoped<IUserRepository, UserRepository>()
-                .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
-                .AddTransient<IIdentityService, IdentityService>()
-                .AddPostgres<UsersDbContext>();
-    }
+    public static IServiceCollection AddCore(this IServiceCollection services)
+        => services
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
+            .AddTransient<IIdentityService, IdentityService>()
+            .AddPostgres<UsersDbContext>();
 }
