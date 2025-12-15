@@ -15,6 +15,12 @@
     <Project Path="src/Modules/Agendas/Confab.Modules.Agendas.Domain/Confab.Modules.Agendas.Domain.csproj" />
     <Project Path="src/Modules/Agendas/Confab.Modules.Agendas.Infrastructure/Confab.Modules.Agendas.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/modules/Attendances/">
+    <Project Path="src/Modules/Attendances/Confab.Modules.Attendances.Api/Confab.Modules.Attendances.Api.csproj" />
+    <Project Path="src/Modules/Attendances/Confab.Modules.Attendances.Application/Confab.Modules.Attendances.Application.csproj" />
+    <Project Path="src/Modules/Attendances/Confab.Modules.Attendances.Domain/Confab.Modules.Attendances.Domain.csproj" />
+    <Project Path="src/Modules/Attendances/Confab.Modules.Attendances.Infrastructure/Confab.Modules.Attendances.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/modules/Conferences/">
     <Project Path="src/Modules/Conferences/Confab.Modules.Conferences.Api/Confab.Modules.Conferences.Api.csproj" />
     <Project Path="src/Modules/Conferences/Confab.Modules.Conferences.Core/Confab.Modules.Conferences.Core.csproj" />
