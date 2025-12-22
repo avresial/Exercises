@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Confab.Modules.Tickets.Core.DTO;
 using Confab.Modules.Tickets.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Tickets.Api.Controllers;
 
@@ -17,7 +17,7 @@ internal class SalesController : BaseController
     {
         _ticketSaleService = ticketSaleService;
     }
-    
+
     [HttpGet("conferences/{conferenceId}")]
     [ProducesResponseType(200)]
     public async Task<ActionResult<IEnumerable<TicketSaleInfoDto>>> GetAll(Guid conferenceId)

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Confab.Shared.Abstractions.Commands;
+﻿using Confab.Shared.Abstractions.Commands;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
 
 namespace Confab.Shared.Infrastructure.Commands;
 

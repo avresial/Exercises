@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Confab.Shared.Abstractions.Kernel.Types;
+﻿using Confab.Shared.Abstractions.Kernel.Types;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Domain.CallForPapers.Repositories;
 

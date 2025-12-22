@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace Confab.Modules.Conferences.Core.DAL;
+
 internal class ConferencesDbContext(DbContextOptions<ConferencesDbContext> options) : DbContext(options)
 {
     public DbSet<Conference> Conferences { get; set; }

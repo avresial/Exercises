@@ -1,6 +1,6 @@
-using System;
 using Confab.Modules.Agendas.Application.Agendas.DTO;
 using Confab.Shared.Abstractions.Queries;
+using System;
 
 namespace Confab.Modules.Agendas.Application.Agendas.Queries;
 

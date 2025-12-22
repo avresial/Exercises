@@ -3,6 +3,7 @@ using Confab.Modules.Conferences.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Confab.Modules.Conferences.Core.DAL.Repositories;
+
 internal class ConferenceRepository(ConferencesDbContext context) : IConferenceRepository
 {
     private DbSet<Conference> Conferences => context.Conferences;

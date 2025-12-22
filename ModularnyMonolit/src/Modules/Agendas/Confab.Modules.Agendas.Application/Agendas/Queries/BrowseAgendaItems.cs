@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Confab.Modules.Agendas.Application.Agendas.DTO;
+﻿using Confab.Modules.Agendas.Application.Agendas.DTO;
 using Confab.Shared.Abstractions.Queries;
+using System;
+using System.Collections.Generic;
 
 namespace Confab.Modules.Agendas.Application.Agendas.Queries;
 

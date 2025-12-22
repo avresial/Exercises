@@ -1,4 +1,5 @@
 ﻿namespace Confab.Modules.Conferences.Api;
+
 internal class ConferencesModule //: IModule
 {
     public const string BasePath = "conferences-module";

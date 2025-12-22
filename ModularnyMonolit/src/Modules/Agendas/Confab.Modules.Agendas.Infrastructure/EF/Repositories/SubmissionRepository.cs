@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Confab.Modules.Agendas.Domain.Submissions.Entities;
+﻿using Confab.Modules.Agendas.Domain.Submissions.Entities;
 using Confab.Modules.Agendas.Domain.Submissions.Repositories;
 using Confab.Shared.Abstractions.Kernel.Types;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF.Repositories;
 

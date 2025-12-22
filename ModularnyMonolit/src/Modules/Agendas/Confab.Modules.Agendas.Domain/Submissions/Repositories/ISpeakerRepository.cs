@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Confab.Modules.Agendas.Domain.Submissions.Entities;
+﻿using Confab.Modules.Agendas.Domain.Submissions.Entities;
 using Confab.Shared.Abstractions.Kernel.Types;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Domain.Submissions.Repositories;
 

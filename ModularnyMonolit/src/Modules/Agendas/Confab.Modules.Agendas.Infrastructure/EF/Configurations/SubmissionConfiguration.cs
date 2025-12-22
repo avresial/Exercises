@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Confab.Modules.Agendas.Domain.Submissions.Entities;
+﻿using Confab.Modules.Agendas.Domain.Submissions.Entities;
 using Confab.Shared.Abstractions.Kernel.Types;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF.Configurations;
 
@@ -18,7 +18,7 @@ public class SubmissionConfiguration : IEntityTypeConfiguration<Submission>
         builder
             .Property(x => x.Id)
             .HasConversion(x => x.Value, x => new AggregateId(x));
-        
+
         builder
             .Property(x => x.ConferenceId)
             .HasConversion(x => x.Value, x => new ConferenceId(x));
@@ -26,11 +26,11 @@ public class SubmissionConfiguration : IEntityTypeConfiguration<Submission>
         builder
             .Property(x => x.Tags)
             .HasConversion(x => string.Join(',', x), x => x.Split(',', StringSplitOptions.None));
-        
+
         builder
             .Property(x => x.Version)
             .IsConcurrencyToken();
-        
+
         builder
             .Property(x => x.Tags).Metadata.SetValueComparer(
                 new ValueComparer<IEnumerable<string>>(

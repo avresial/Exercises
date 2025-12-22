@@ -1,11 +1,11 @@
-﻿using System;
-using Confab.Shared.Abstractions.Exceptions;
+﻿using Confab.Shared.Abstractions.Exceptions;
+using System;
 
 namespace Confab.Modules.Agendas.Domain.Agendas.Exceptions;
 
 public class EmptyAgendaTrackNameException : ConfabException
 {
-    public EmptyAgendaTrackNameException(Guid agendaTrackId) 
+    public EmptyAgendaTrackNameException(Guid agendaTrackId)
         : base($"Agenda track with ID: {agendaTrackId} defines empty name.")
     {
     }

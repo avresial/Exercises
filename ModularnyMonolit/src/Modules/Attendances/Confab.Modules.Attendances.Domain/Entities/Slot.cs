@@ -11,13 +11,13 @@ namespace Confab.Modules.Attendances.Domain.Entities
         private Slot()
         {
         }
-        
+
         public Slot(SlotId id, ParticipantId participantId = null)
         {
             Id = id;
             ParticipantId = participantId;
         }
-        
+
         public void Take(ParticipantId participantId) => ParticipantId = participantId;
     }
 }

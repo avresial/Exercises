@@ -8,7 +8,7 @@ namespace Confab.Shared.Infrastructure.Messaging;
 internal static class Extensions
 {
     private const string SectionName = "messaging";
-    
+
     internal static IServiceCollection AddMessaging(this IServiceCollection services)
     {
         services.AddSingleton<IMessageBroker, MessageBroker>();
@@ -22,7 +22,7 @@ internal static class Extensions
         {
             services.AddHostedService<BackgroundDispatcher>();
         }
-        
+
         return services;
     }
 }

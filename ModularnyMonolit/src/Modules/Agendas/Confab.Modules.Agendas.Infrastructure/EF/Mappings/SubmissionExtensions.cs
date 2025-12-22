@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using Confab.Modules.Agendas.Application.Submissions.DTO;
+﻿using Confab.Modules.Agendas.Application.Submissions.DTO;
 using Confab.Modules.Agendas.Domain.Submissions.Entities;
+using System.Linq;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF.Mappings;
 

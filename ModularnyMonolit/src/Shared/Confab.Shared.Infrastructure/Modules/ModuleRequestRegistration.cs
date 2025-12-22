@@ -1,4 +1,5 @@
 ﻿namespace Confab.Shared.Infrastructure.Modules;
+
 public sealed class ModuleRequestRegistration(Type requestType, Type responseType, Func<object, Task<object>> action)
 {
     public Type RequestType { get; } = requestType;

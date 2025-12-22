@@ -1,4 +1,5 @@
 ﻿namespace Confab.Shared.Infrastructure.Modules;
+
 internal sealed class ModuleRegistry : IModuleRegistry
 {
     private readonly List<ModuleBroadcastRegistration> _broadcastRegistrations = new();

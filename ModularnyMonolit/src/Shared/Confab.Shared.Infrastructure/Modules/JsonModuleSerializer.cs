@@ -2,6 +2,7 @@
 using System.Text.Json;
 
 namespace Confab.Shared.Infrastructure.Modules;
+
 internal sealed class JsonModuleSerializer : IModuleSerializer
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

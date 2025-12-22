@@ -1,6 +1,6 @@
-﻿using System;
-using Confab.Modules.Agendas.Domain.CallForPapers.Exceptions;
+﻿using Confab.Modules.Agendas.Domain.CallForPapers.Exceptions;
 using Confab.Shared.Abstractions.Kernel.Types;
+using System;
 
 namespace Confab.Modules.Agendas.Domain.CallForPapers.Entities;
 
@@ -11,7 +11,7 @@ public sealed class CallForPapers : AggregateRoot
     public DateTime To { get; private set; }
     public bool IsOpened { get; private set; }
 
-    public CallForPapers(AggregateId id, ConferenceId conferenceId, DateTime @from, DateTime to, bool isOpened, 
+    public CallForPapers(AggregateId id, ConferenceId conferenceId, DateTime @from, DateTime to, bool isOpened,
         int version = 0)
     {
         Id = id;
@@ -58,7 +58,7 @@ public sealed class CallForPapers : AggregateRoot
         IsOpened = true;
         IncrementVersion();
     }
-    
+
     public void Close()
     {
         IsOpened = false;

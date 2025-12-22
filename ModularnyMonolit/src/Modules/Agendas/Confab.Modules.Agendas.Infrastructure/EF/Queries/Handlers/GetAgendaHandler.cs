@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Confab.Modules.Agendas.Application.Agendas.DTO;
+﻿using Confab.Modules.Agendas.Application.Agendas.DTO;
 using Confab.Modules.Agendas.Application.Agendas.Queries;
 using Confab.Modules.Agendas.Domain.Agendas.Entities;
 using Confab.Modules.Agendas.Infrastructure.EF.Mappings;
 using Confab.Shared.Abstractions.Queries;
 using Confab.Shared.Abstractions.Storage;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF.Queries.Handlers;
 

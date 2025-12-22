@@ -1,5 +1,5 @@
-using System;
 using Confab.Modules.Attendances.Domain.Types;
+using System;
 
 namespace Confab.Modules.Attendances.Domain.Entities
 {

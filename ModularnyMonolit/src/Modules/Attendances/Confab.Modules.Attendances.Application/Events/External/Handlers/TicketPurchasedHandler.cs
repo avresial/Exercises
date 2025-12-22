@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Confab.Modules.Attendances.Domain.Entities;
+﻿using Confab.Modules.Attendances.Domain.Entities;
 using Confab.Modules.Attendances.Domain.Repositories;
 using Confab.Shared.Abstractions.Events;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Attendances.Application.Events.External.Handlers
 {
@@ -18,7 +18,7 @@ namespace Confab.Modules.Attendances.Application.Events.External.Handlers
             _participantsRepository = participantsRepository;
             _logger = logger;
         }
-        
+
         public async Task HandleAsync(TicketPurchased @event)
         {
             var participant = await _participantsRepository.GetAsync(@event.ConferenceId, @event.UserId);

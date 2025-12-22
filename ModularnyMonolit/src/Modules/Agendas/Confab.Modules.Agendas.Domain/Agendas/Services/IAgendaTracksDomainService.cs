@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Confab.Modules.Agendas.Domain.Agendas.Entities;
+﻿using Confab.Modules.Agendas.Domain.Agendas.Entities;
 using Confab.Shared.Abstractions.Kernel.Types;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Domain.Agendas.Services;
 

@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Confab.Modules.Attendances.Domain.Exceptions;
+﻿using Confab.Modules.Attendances.Domain.Exceptions;
 using Confab.Modules.Attendances.Domain.Repositories;
 using Confab.Shared.Abstractions.Commands;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Attendances.Application.Commands.Handlers
 {
@@ -16,7 +16,7 @@ namespace Confab.Modules.Attendances.Application.Commands.Handlers
             _attendableEventsRepository = attendableEventsRepository;
             _participantsRepository = participantsRepository;
         }
-        
+
         public async Task HandleAsync(AttendEvent command)
         {
             var attendableEvent = await _attendableEventsRepository.GetAsync(command.Id);

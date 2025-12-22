@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Confab.Modules.Agendas.Application.CallForPapers.Commands;
 using Confab.Modules.Agendas.Application.CallForPapers.DTO;
 using Confab.Modules.Agendas.Application.CallForPapers.Queries;
@@ -8,6 +6,8 @@ using Confab.Shared.Abstractions.Queries;
 using Confab.Shared.Infrastructure.Api;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Api.Controllers;
 
@@ -24,17 +24,17 @@ internal class CallForPapersController : BaseController
         _commandDispatcher = commandDispatcher;
         _queryDispatcher = queryDispatcher;
     }
-    
+
     [HttpGet]
     [AllowAnonymous]
-    public async Task<ActionResult<CallForPapersDto>> GetAsync(Guid conferenceId) 
-        => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetCallForPapers {ConferenceId = conferenceId}));
+    public async Task<ActionResult<CallForPapersDto>> GetAsync(Guid conferenceId)
+        => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetCallForPapers { ConferenceId = conferenceId }));
 
     [HttpPost]
     public async Task<ActionResult> CreateAsync(Guid conferenceId, CreateCallForPapers command)
     {
         await _commandDispatcher.SendAsync(command.Bind(x => x.ConferenceId, conferenceId));
-        return CreatedAtAction("Get", new {conferenceId = command.ConferenceId}, null);
+        return CreatedAtAction("Get", new { conferenceId = command.ConferenceId }, null);
     }
 
     [HttpPut("open")]
@@ -43,7 +43,7 @@ internal class CallForPapersController : BaseController
         await _commandDispatcher.SendAsync(new OpenCallForPapers(conferenceId));
         return NoContent();
     }
-    
+
     [HttpPut("close")]
     public async Task<ActionResult> CloseAsync(Guid conferenceId)
     {

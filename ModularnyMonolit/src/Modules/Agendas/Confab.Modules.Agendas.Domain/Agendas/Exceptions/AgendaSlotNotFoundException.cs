@@ -1,11 +1,11 @@
-﻿using System;
-using Confab.Shared.Abstractions.Exceptions;
+﻿using Confab.Shared.Abstractions.Exceptions;
+using System;
 
 namespace Confab.Modules.Agendas.Domain.Agendas.Exceptions;
 
 public class AgendaSlotNotFoundException : ConfabException
 {
-    public AgendaSlotNotFoundException(Guid agendaSlotId) 
+    public AgendaSlotNotFoundException(Guid agendaSlotId)
         : base($"Agenda slot with ID: '{agendaSlotId}' was not found.")
     {
     }

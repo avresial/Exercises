@@ -14,7 +14,7 @@ internal static class Extensions
             Bio = entity.Bio,
             AvatarUrl = entity.AvatarUrl
         };
-    
+
     public static Speaker AsEntity(this SpeakerDto dto)
         => new()
         {

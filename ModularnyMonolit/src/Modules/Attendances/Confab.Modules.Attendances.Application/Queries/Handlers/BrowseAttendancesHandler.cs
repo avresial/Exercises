@@ -1,11 +1,11 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Confab.Modules.Attendances.Application.Clients.Agendas;
 using Confab.Modules.Attendances.Application.Clients.Agendas.DTO;
 using Confab.Modules.Attendances.Application.DTO;
 using Confab.Modules.Attendances.Domain.Repositories;
 using Confab.Shared.Abstractions.Queries;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Attendances.Application.Queries.Handlers
 {

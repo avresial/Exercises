@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Confab.Modules.Attendances.Application.Clients.Agendas;
+﻿using Confab.Modules.Attendances.Application.Clients.Agendas;
 using Confab.Modules.Attendances.Application.Clients.Agendas.DTO;
 using Confab.Modules.Attendances.Infrastructure.Clients.Requests;
 using Confab.Shared.Abstractions.Modules;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Attendances.Infrastructure.Clients
 {

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Confab.Modules.Tickets.Core.Entities;
+﻿using Confab.Modules.Tickets.Core.Entities;
 using Confab.Modules.Tickets.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Tickets.Core.DAL.Repositories;
 

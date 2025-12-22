@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Confab.Modules.Agendas.Application.Agendas.Events;
+﻿using Confab.Modules.Agendas.Application.Agendas.Events;
 using Confab.Modules.Agendas.Application.Agendas.Exceptions;
 using Confab.Modules.Agendas.Domain.Agendas.Repositories;
 using Confab.Shared.Abstractions.Commands;
 using Confab.Shared.Abstractions.Messaging;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Application.Agendas.Commands.Handlers;
 
@@ -25,7 +25,7 @@ internal class DeleteAgendaTrackHandler : ICommandHandler<DeleteAgendaTrack>
         {
             throw new AgendaTrackNotFoundException(command.Id);
         }
-        
+
         await _repository.DeleteAsync(agendaTrack);
         await _messageBroker.PublishAsync(new AgendaTrackDeleted(command.Id));
     }

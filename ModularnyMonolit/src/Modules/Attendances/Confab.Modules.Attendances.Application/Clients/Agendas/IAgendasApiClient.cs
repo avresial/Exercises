@@ -1,7 +1,7 @@
+using Confab.Modules.Attendances.Application.Clients.Agendas.DTO;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Confab.Modules.Attendances.Application.Clients.Agendas.DTO;
 
 namespace Confab.Modules.Attendances.Application.Clients.Agendas
 {

@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Confab.Modules.Tickets.Core.DTO;
 using Confab.Modules.Tickets.Core.Entities;
 using Confab.Modules.Tickets.Core.Exceptions;
 using Confab.Modules.Tickets.Core.Repositories;
 using Confab.Shared.Abstractions.Time;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Tickets.Core.Services;
 
@@ -100,7 +100,7 @@ internal class TicketSaleService : ITicketSaleService
 
         var now = _clock.CurrentDate();
         var ticketSale = await _ticketSaleRepository.GetCurrentForConferenceAsync(conferenceId, now);
-        
+
         return ticketSale is not null ? Map(ticketSale, conference) : null;
     }
 
@@ -113,7 +113,7 @@ internal class TicketSaleService : ITicketSaleService
             availableTickets = ticketSale.Tickets.Count(x => x.UserId is null);
         }
 
-        return new TicketSaleInfoDto( ticketSale.Name, new ConferenceDto(conference.Id, conference.Name), ticketSale.Price,
+        return new TicketSaleInfoDto(ticketSale.Name, new ConferenceDto(conference.Id, conference.Name), ticketSale.Price,
             totalTickets, availableTickets, ticketSale.From, ticketSale.To);
     }
 }

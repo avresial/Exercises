@@ -1,7 +1,7 @@
-using System;
-using System.Threading.Tasks;
 using Confab.Modules.Users.Core.DTO;
 using Confab.Shared.Abstractions.Auth;
+using System;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Users.Core.Services;
 

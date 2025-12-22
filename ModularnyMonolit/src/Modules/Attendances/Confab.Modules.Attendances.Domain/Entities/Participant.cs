@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Confab.Modules.Attendances.Domain.Events;
+﻿using Confab.Modules.Attendances.Domain.Events;
 using Confab.Modules.Attendances.Domain.Exceptions;
 using Confab.Modules.Attendances.Domain.Types;
 using Confab.Shared.Abstractions.Kernel.Types;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Confab.Modules.Attendances.Domain.Entities
 {
     public class Participant : AggregateRoot<ParticipantId>
     {
         private readonly HashSet<Attendance> _attendances = new();
-        
+
         public ConferenceId ConferenceId { get; private set; }
         public UserId UserId { get; private set; }
         public IEnumerable<Attendance> Attendances => _attendances;
@@ -34,12 +34,12 @@ namespace Confab.Modules.Attendances.Domain.Entities
             {
                 throw new AlreadyParticipatingInEventException();
             }
-            
+
             if (HasCollision(attendance))
             {
                 throw new AlreadyParticipatingSameTimeException();
             }
-            
+
             _attendances.Add(attendance);
             AddEvent(new ParticipantAttendedToEvent(this, attendance));
         }

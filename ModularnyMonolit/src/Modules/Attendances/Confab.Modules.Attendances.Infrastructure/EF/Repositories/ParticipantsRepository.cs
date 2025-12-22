@@ -1,11 +1,11 @@
-using System.Linq;
-using System.Threading.Tasks;
 using Confab.Modules.Attendances.Domain.Entities;
 using Confab.Modules.Attendances.Domain.Events;
 using Confab.Modules.Attendances.Domain.Repositories;
 using Confab.Modules.Attendances.Domain.Types;
 using Confab.Shared.Abstractions.Kernel.Types;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Attendances.Infrastructure.EF.Repositories
 {
@@ -46,7 +46,7 @@ namespace Confab.Modules.Attendances.Infrastructure.EF.Repositories
             {
                 _context.Entry(attendance).State = EntityState.Added;
             }
-            
+
             _participants.Update(participant);
             await _context.SaveChangesAsync();
         }

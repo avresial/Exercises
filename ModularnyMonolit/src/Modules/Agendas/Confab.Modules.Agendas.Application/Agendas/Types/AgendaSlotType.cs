@@ -7,7 +7,7 @@ public static class AgendaSlotType
 {
     public const string Regular = "regular";
     public const string Placeholder = "placeholder";
-    
+
     public static string GetSlotType(object slot)
         => slot switch
         {

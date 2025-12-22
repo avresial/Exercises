@@ -1,5 +1,5 @@
-﻿using System;
-using Confab.Shared.Abstractions.Exceptions;
+﻿using Confab.Shared.Abstractions.Exceptions;
+using System;
 
 namespace Confab.Modules.Agendas.Domain.Submissions.Exceptions;
 
@@ -7,7 +7,7 @@ public class InvalidSubmissionLevelException : ConfabException
 {
     public Guid SubmissionId { get; }
 
-    public InvalidSubmissionLevelException(Guid submissionId) 
+    public InvalidSubmissionLevelException(Guid submissionId)
         : base($"Submission with ID: '{submissionId}' defines invalid level.")
         => SubmissionId = submissionId;
 }

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Confab.Shared.Abstractions.Commands;
+using System;
 using System.Collections.Generic;
-using Confab.Shared.Abstractions.Commands;
 
 namespace Confab.Modules.Agendas.Application.Submissions.Commands;
 

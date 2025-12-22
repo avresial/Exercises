@@ -11,7 +11,7 @@ internal class ContextFactory : IContextFactory
     {
         _httpContextAccessor = httpContextAccessor;
     }
-    
+
     public IContext Create()
     {
         var httpContext = _httpContextAccessor.HttpContext;

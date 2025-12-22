@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Confab.Modules.Agendas.Application.CallForPapers.DTO;
+﻿using Confab.Modules.Agendas.Application.CallForPapers.DTO;
 using Confab.Modules.Agendas.Application.CallForPapers.Queries;
 using Confab.Modules.Agendas.Domain.CallForPapers.Entities;
 using Confab.Modules.Agendas.Infrastructure.EF.Mappings;
 using Confab.Shared.Abstractions.Queries;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF.Queries.Handlers;
 

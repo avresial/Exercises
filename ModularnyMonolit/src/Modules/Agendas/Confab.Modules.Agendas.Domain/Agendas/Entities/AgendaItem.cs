@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Confab.Modules.Agendas.Domain.Agendas.Exceptions;
+﻿using Confab.Modules.Agendas.Domain.Agendas.Exceptions;
 using Confab.Modules.Agendas.Domain.Submissions.Entities;
 using Confab.Modules.Agendas.Domain.Submissions.Exceptions;
 using Confab.Shared.Abstractions.Kernel.Types;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Confab.Modules.Agendas.Domain.Agendas.Entities;
 
@@ -17,11 +17,11 @@ public class AgendaItem : AggregateRoot
     public IEnumerable<Speaker> Speakers => _speakers;
 
     private ICollection<Speaker> _speakers = new List<Speaker>();
-    
+
     public AgendaSlot AgendaSlot { get; private set; }
-    
-    public AgendaItem(AggregateId id, ConferenceId conferenceId, string title, string description, int level, 
-        IEnumerable<string> tags, ICollection<Speaker> speakers, int version = 0) 
+
+    public AgendaItem(AggregateId id, ConferenceId conferenceId, string title, string description, int level,
+        IEnumerable<string> tags, ICollection<Speaker> speakers, int version = 0)
     {
         Id = id;
         ConferenceId = conferenceId;
@@ -40,7 +40,7 @@ public class AgendaItem : AggregateRoot
     {
     }
 
-    public static AgendaItem Create(AggregateId id, ConferenceId conferenceId, string title, string description, 
+    public static AgendaItem Create(AggregateId id, ConferenceId conferenceId, string title, string description,
         int level, IEnumerable<string> tags, ICollection<Speaker> speakers)
     {
         var agendaItem = new AgendaItem(id, conferenceId);
@@ -63,7 +63,7 @@ public class AgendaItem : AggregateRoot
         Title = title;
         IncrementVersion();
     }
-    
+
     public void ChangeDescription(string description)
     {
         if (string.IsNullOrEmpty(description))
@@ -87,7 +87,7 @@ public class AgendaItem : AggregateRoot
         static bool IsNotInRange(int level) => level < 1 || level > 6;
         IncrementVersion();
     }
-    
+
     public void ChangeTags(IEnumerable<string> tags)
     {
         if (tags is null || !tags.Any())
@@ -97,7 +97,7 @@ public class AgendaItem : AggregateRoot
 
         Tags = tags;
     }
-    
+
     public void ChangeSpeakers(ICollection<Speaker> speakers)
     {
         _speakers = speakers;

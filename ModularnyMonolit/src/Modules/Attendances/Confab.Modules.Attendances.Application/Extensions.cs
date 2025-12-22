@@ -1,8 +1,8 @@
-using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("Confab.Modules.Attendances.Tests.Unit")]
-[assembly:InternalsVisibleTo("DynamicProxyAssemblyGen2")]
+[assembly: InternalsVisibleTo("Confab.Modules.Attendances.Tests.Unit")]
+[assembly: InternalsVisibleTo("DynamicProxyAssemblyGen2")]
 namespace Confab.Modules.Attendances.Application
 {
     public static class Extensions

@@ -11,11 +11,11 @@ internal class CallForPapersConfiguration : IEntityTypeConfiguration<CallForPape
     public void Configure(EntityTypeBuilder<CallForPapers> builder)
     {
         builder.HasKey(s => s.Id);
-        
+
         builder
             .Property(s => s.Id)
             .HasConversion(id => id.Value, id => new AggregateId(id));
-        
+
         builder
             .Property(s => s.ConferenceId)
             .HasConversion(id => id.Value, id => new ConferenceId(id));

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Confab.Modules.Agendas.Domain.Agendas.Exceptions;
+using Confab.Shared.Abstractions.Kernel.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Confab.Modules.Agendas.Domain.Agendas.Exceptions;
-using Confab.Shared.Abstractions.Kernel.Types;
 
 namespace Confab.Modules.Agendas.Domain.Agendas.Entities;
 
@@ -15,7 +15,7 @@ public sealed class AgendaTrack : AggregateRoot
     private readonly ICollection<AgendaSlot> _slots = new List<AgendaSlot>();
 
     public AgendaTrack(AggregateId id, ConferenceId conferenceId, string name, ICollection<AgendaSlot> slots
-        , int version = 0) :this(id, conferenceId)
+        , int version = 0) : this(id, conferenceId)
     {
         Name = name;
         _slots = slots.ToHashSet();
@@ -38,7 +38,7 @@ public sealed class AgendaTrack : AggregateRoot
         agendaTrack.ChangeName(name);
         agendaTrack.ClearEvents();
         agendaTrack.Version = 0;
-        
+
         return agendaTrack;
     }
 
@@ -48,7 +48,7 @@ public sealed class AgendaTrack : AggregateRoot
         {
             throw new EmptyAgendaTrackNameException(Id);
         }
-        
+
         Name = name;
         IncrementVersion();
     }
@@ -56,12 +56,12 @@ public sealed class AgendaTrack : AggregateRoot
     public void AddRegularSlot(EntityId id, DateTime from, DateTime to, int? participantsLimit)
     {
         ValidateTimeConflict(from, to);
-        
+
         var regularSlot = RegularAgendaSlot.Create(id, from, to, participantsLimit);
         _slots.Add(regularSlot);
         IncrementVersion();
     }
-    
+
     public void AddPlaceholderSlot(EntityId id, DateTime from, DateTime to)
     {
         ValidateTimeConflict(from, to);
@@ -79,16 +79,16 @@ public sealed class AgendaTrack : AggregateRoot
         {
             throw new AgendaSlotNotFoundException(id);
         }
-        
-        if(slot is not PlaceholderAgendaSlot placeholderAgendaSlot)
+
+        if (slot is not PlaceholderAgendaSlot placeholderAgendaSlot)
         {
             throw new InvalidAgendaSlotTypeException(id);
         }
-        
+
         placeholderAgendaSlot.ChangePlaceholder(placeholder);
         IncrementVersion();
     }
-    
+
     internal void ChangeSlotAgendaItem(EntityId id, AgendaItem agendaItemId)
     {
         var slot = _slots.FirstOrDefault(s => s.Id == id);
@@ -97,12 +97,12 @@ public sealed class AgendaTrack : AggregateRoot
         {
             throw new AgendaSlotNotFoundException(id);
         }
-        
-        if(slot is not RegularAgendaSlot regularAgendaSlot)
+
+        if (slot is not RegularAgendaSlot regularAgendaSlot)
         {
             throw new InvalidAgendaSlotTypeException(id);
         }
-        
+
         regularAgendaSlot.ChangeAgendaItem(agendaItemId);
         IncrementVersion();
     }
@@ -115,7 +115,7 @@ public sealed class AgendaTrack : AggregateRoot
         {
             throw new AgendaSlotNotFoundException(id);
         }
-        
+
         _slots.Remove(slot);
         IncrementVersion();
     }

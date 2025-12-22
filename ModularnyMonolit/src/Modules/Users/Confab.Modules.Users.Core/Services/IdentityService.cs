@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Confab.Modules.Users.Core.DTO;
 using Confab.Modules.Users.Core.Entities;
 using Confab.Modules.Users.Core.Events;
@@ -10,6 +7,9 @@ using Confab.Shared.Abstractions.Auth;
 using Confab.Shared.Abstractions.Messaging;
 using Confab.Shared.Abstractions.Time;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Users.Core.Services;
 

@@ -1,4 +1,5 @@
 ﻿namespace Confab.Shared.Abstractions.Contexts;
+
 public interface IContext
 {
     string RequestId { get; }

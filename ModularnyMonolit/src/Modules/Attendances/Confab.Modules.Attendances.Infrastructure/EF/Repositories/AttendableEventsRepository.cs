@@ -1,8 +1,8 @@
-using System.Threading.Tasks;
 using Confab.Modules.Attendances.Domain.Entities;
 using Confab.Modules.Attendances.Domain.Repositories;
 using Confab.Modules.Attendances.Domain.Types;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Attendances.Infrastructure.EF.Repositories
 {
@@ -27,7 +27,7 @@ namespace Confab.Modules.Attendances.Infrastructure.EF.Repositories
             await _attendableEvents.AddAsync(attendableEvent);
             await _context.SaveChangesAsync();
         }
-        
+
         public async Task UpdateAsync(AttendableEvent attendableEvent)
         {
             _attendableEvents.Update(attendableEvent);

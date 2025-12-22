@@ -1,5 +1,5 @@
-using System;
 using Confab.Modules.Tickets.Core.Entities;
+using System;
 
 namespace Confab.Modules.Tickets.Core.Services;
 

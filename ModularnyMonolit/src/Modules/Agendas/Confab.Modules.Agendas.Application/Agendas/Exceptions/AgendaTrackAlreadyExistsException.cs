@@ -1,11 +1,11 @@
-﻿using System;
-using Confab.Shared.Abstractions.Exceptions;
+﻿using Confab.Shared.Abstractions.Exceptions;
+using System;
 
 namespace Confab.Modules.Agendas.Application.Agendas.Exceptions;
 
 public class AgendaTrackAlreadyExistsException : ConfabException
 {
-    public AgendaTrackAlreadyExistsException(Guid agendaTrackId) 
+    public AgendaTrackAlreadyExistsException(Guid agendaTrackId)
         : base($"Agenda track with ID: '{agendaTrackId} already exists.'")
     {
     }

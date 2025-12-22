@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Confab.Shared.Abstractions.Modules;
+﻿using Confab.Shared.Abstractions.Modules;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Confab.Shared.Infrastructure.Messaging.Dispatchers;
 
@@ -13,7 +13,7 @@ internal sealed class BackgroundDispatcher : BackgroundService
     private readonly IModuleClient _moduleClient;
     private readonly ILogger<BackgroundDispatcher> _logger;
 
-    public BackgroundDispatcher(IMessageChannel messageChannel, IModuleClient moduleClient, 
+    public BackgroundDispatcher(IMessageChannel messageChannel, IModuleClient moduleClient,
         ILogger<BackgroundDispatcher> logger)
     {
         _messageChannel = messageChannel;
@@ -36,7 +36,7 @@ internal sealed class BackgroundDispatcher : BackgroundService
                 _logger.LogError(exception, exception.Message);
             }
         }
-        
+
         _logger.LogInformation("Finished running the background dispatcher.");
     }
 }

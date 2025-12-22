@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace Confab.Modules.Conferences.Core.DTO;
+
 internal class ConferenceDetailsDto : ConferenceDto
 {
     [Required]

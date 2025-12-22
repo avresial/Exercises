@@ -1,4 +1,5 @@
 ﻿namespace Confab.Shared.Infrastructure.Postgres;
+
 internal class UnitOfWorkTypeRegistry
 {
     private readonly Dictionary<string, Type> _types = new();

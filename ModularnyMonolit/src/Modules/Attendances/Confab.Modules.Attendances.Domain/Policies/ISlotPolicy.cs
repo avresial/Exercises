@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Confab.Modules.Attendances.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Confab.Modules.Attendances.Domain.Policies
 {

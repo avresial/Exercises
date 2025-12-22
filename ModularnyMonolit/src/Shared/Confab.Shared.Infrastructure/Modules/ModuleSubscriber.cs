@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Confab.Shared.Infrastructure.Modules;
+
 internal sealed class ModuleSubscriber(IModuleRegistry moduleRegistry, IServiceProvider serviceProvider) : IModuleSubscriber
 {
     public IModuleSubscriber Subscribe<TRequest, TResponse>(string path,

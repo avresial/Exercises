@@ -1,5 +1,5 @@
-using System;
 using Confab.Modules.Tickets.Core.Exceptions;
+using System;
 
 namespace Confab.Modules.Tickets.Core.Entities;
 
@@ -23,7 +23,7 @@ public class Ticket
         {
             throw new TicketAlreadyPurchasedException(ConferenceId, UserId.Value);
         }
-        
+
         UserId = userId;
         PurchasedAt = purchasedAt;
         Price = price;

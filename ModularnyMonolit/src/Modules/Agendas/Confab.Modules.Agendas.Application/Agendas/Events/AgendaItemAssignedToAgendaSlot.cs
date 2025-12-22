@@ -1,5 +1,5 @@
-﻿using System;
-using Confab.Shared.Abstractions.Events;
+﻿using Confab.Shared.Abstractions.Events;
+using System;
 
 namespace Confab.Modules.Agendas.Application.Agendas.Events;
 

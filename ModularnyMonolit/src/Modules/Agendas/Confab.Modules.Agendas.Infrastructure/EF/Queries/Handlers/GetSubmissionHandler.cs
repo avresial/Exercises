@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Confab.Modules.Agendas.Application.Submissions.DTO;
+﻿using Confab.Modules.Agendas.Application.Submissions.DTO;
 using Confab.Modules.Agendas.Application.Submissions.Queries;
 using Confab.Modules.Agendas.Domain.Submissions.Entities;
 using Confab.Shared.Abstractions.Queries;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF.Queries.Handlers;
 

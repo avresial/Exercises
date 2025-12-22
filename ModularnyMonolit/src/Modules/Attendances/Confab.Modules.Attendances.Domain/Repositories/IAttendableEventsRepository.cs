@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Confab.Modules.Attendances.Domain.Entities;
+﻿using Confab.Modules.Attendances.Domain.Entities;
 using Confab.Modules.Attendances.Domain.Types;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Attendances.Domain.Repositories
 {

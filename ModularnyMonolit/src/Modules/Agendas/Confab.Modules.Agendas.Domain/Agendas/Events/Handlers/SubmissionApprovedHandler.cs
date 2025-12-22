@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Confab.Modules.Agendas.Domain.Agendas.Entities;
+﻿using Confab.Modules.Agendas.Domain.Agendas.Entities;
 using Confab.Modules.Agendas.Domain.Agendas.Repositories;
 using Confab.Modules.Agendas.Domain.Submissions.Consts;
-using Confab.Modules.Agendas.Domain.Submissions.Events;                                                   
+using Confab.Modules.Agendas.Domain.Submissions.Events;
 using Confab.Shared.Abstractions.Kernel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Domain.Agendas.Events.Handlers;
 

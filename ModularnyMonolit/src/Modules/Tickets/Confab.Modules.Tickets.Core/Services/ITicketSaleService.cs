@@ -1,7 +1,7 @@
+using Confab.Modules.Tickets.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Confab.Modules.Tickets.Core.DTO;
 
 namespace Confab.Modules.Tickets.Core.Services;
 

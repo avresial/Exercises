@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Confab.Modules.Agendas.Application;
+﻿using Confab.Modules.Agendas.Application;
 using Confab.Modules.Agendas.Application.Agendas.DTO;
 using Confab.Modules.Agendas.Application.Agendas.Queries;
 using Confab.Modules.Agendas.Domain;
@@ -9,6 +8,7 @@ using Confab.Shared.Abstractions.Queries;
 using Confab.Shared.Infrastructure.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace Confab.Modules.Agendas.Api;
 
@@ -17,12 +17,12 @@ internal class AgendasModule : IModule
     public const string BasePath = "agendas-module";
     public string Name { get; } = "Agendas";
     public string Path => BasePath;
-    
+
     public IEnumerable<string> Policies { get; } = new[]
     {
         "agendas", "cfp", "submissions"
     };
-    
+
     public void Register(IServiceCollection services)
     {
         services

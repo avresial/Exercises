@@ -1,4 +1,5 @@
 ﻿namespace Confab.Shared.Infrastructure.Modules;
+
 public interface IModuleSerializer
 {
     byte[] Serialize<T>(T value);

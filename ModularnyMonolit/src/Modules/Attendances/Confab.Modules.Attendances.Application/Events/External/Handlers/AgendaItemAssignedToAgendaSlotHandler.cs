@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Confab.Modules.Attendances.Application.Clients.Agendas;
+﻿using Confab.Modules.Attendances.Application.Clients.Agendas;
 using Confab.Modules.Attendances.Domain.Entities;
 using Confab.Modules.Attendances.Domain.Exceptions;
 using Confab.Modules.Attendances.Domain.Policies;
 using Confab.Modules.Attendances.Domain.Repositories;
 using Confab.Shared.Abstractions.Events;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Attendances.Application.Events.External.Handlers
 {
@@ -22,7 +22,7 @@ namespace Confab.Modules.Attendances.Application.Events.External.Handlers
             _agendasApiClient = agendasApiClient;
             _slotPolicyFactory = slotPolicyFactory;
         }
-        
+
         public async Task HandleAsync(AgendaItemAssignedToAgendaSlot @event)
         {
             var attendableEvent = await _attendableEventsRepository.GetAsync(@event.AgendaItemId);
@@ -41,7 +41,7 @@ namespace Confab.Modules.Attendances.Application.Events.External.Handlers
             {
                 return;
             }
-            
+
             attendableEvent = new AttendableEvent(@event.AgendaItemId, slot.AgendaItem.ConferenceId, slot.From, slot.To);
             var slotPolicy = _slotPolicyFactory.Get(slot.AgendaItem.Tags.ToArray());
             var slots = slotPolicy.Generate(slot.ParticipantsLimit.Value);

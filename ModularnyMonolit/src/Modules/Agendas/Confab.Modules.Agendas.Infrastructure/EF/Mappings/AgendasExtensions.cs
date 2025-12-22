@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Confab.Modules.Agendas.Application.Agendas.DTO;
+﻿using Confab.Modules.Agendas.Application.Agendas.DTO;
 using Confab.Modules.Agendas.Application.Agendas.Types;
 using Confab.Modules.Agendas.Domain.Agendas.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF.Mappings;
 
@@ -34,10 +34,10 @@ internal static class AgendasExtensions
         };
 
         var regularSlots = agendaTrack.Slots.OfType<RegularAgendaSlot>()
-            .Select(rs => (object) rs.AsDto());
-        
+            .Select(rs => (object)rs.AsDto());
+
         var placeholderSlots = agendaTrack.Slots.OfType<PlaceholderAgendaSlot>()
-            .Select(ps => (object) new PlaceholderAgendaSlotDto
+            .Select(ps => (object)new PlaceholderAgendaSlotDto
             {
                 Id = ps.Id,
                 From = ps.From,

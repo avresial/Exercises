@@ -3,6 +3,7 @@ using Confab.Modules.Conferences.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Confab.Modules.Conferences.Core.DAL.Repositories;
+
 internal class HostRepository(ConferencesDbContext context) : IHostRepository
 {
     private DbSet<Host> Hosts => context.Hosts;

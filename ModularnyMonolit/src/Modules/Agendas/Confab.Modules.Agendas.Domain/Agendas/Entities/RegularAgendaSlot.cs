@@ -1,6 +1,6 @@
-﻿using System;
-using Confab.Modules.Agendas.Domain.Agendas.Exceptions;
+﻿using Confab.Modules.Agendas.Domain.Agendas.Exceptions;
 using Confab.Shared.Abstractions.Kernel.Types;
+using System;
 
 namespace Confab.Modules.Agendas.Domain.Agendas.Entities;
 
@@ -15,7 +15,7 @@ public sealed class RegularAgendaSlot : AgendaSlot
     private RegularAgendaSlot()
     {
     }
-    
+
     internal RegularAgendaSlot(EntityId id) : base(id)
     {
     }
@@ -25,7 +25,7 @@ public sealed class RegularAgendaSlot : AgendaSlot
         var regularAgendaSlot = new RegularAgendaSlot(id);
         regularAgendaSlot.ChangeDateRange(from, to);
         regularAgendaSlot.ChangeParticipantsLimit(participantsLimit);
-        
+
         return regularAgendaSlot;
     }
 

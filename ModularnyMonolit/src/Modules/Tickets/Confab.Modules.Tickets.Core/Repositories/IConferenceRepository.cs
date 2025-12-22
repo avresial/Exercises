@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Confab.Modules.Tickets.Core.Entities;
+using System;
 using System.Threading.Tasks;
-using Confab.Modules.Tickets.Core.Entities;
 
 namespace Confab.Modules.Tickets.Core.Repositories;
 

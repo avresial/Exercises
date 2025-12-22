@@ -11,10 +11,10 @@ namespace Confab.Modules.Attendances.Infrastructure.EF.Configurations
         {
             builder.Property(x => x.AttendableEventId)
                 .HasConversion(x => x.Value, x => new AttendableEventId(x));
-            
+
             builder.Property(x => x.SlotId)
                 .HasConversion(x => x.Value, x => new SlotId(x));
-            
+
             builder.Property(x => x.ParticipantId)
                 .HasConversion(x => x.Value, x => new ParticipantId(x));
         }

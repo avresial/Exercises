@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Confab.Shared.Abstractions.Queries;
+﻿using Confab.Shared.Abstractions.Queries;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
 
 namespace Confab.Shared.Infrastructure.Queries;
 
@@ -18,8 +18,8 @@ internal sealed class QueryDispatcher : IQueryDispatcher
         var handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));
         var handler = scope.ServiceProvider.GetRequiredService(handlerType);
 
-        return await (Task<TResult>) handlerType
+        return await (Task<TResult>)handlerType
             .GetMethod(nameof(IQueryHandler<IQuery<TResult>, TResult>.HandleAsync))
-            ?.Invoke(handler, new[] {query});
+            ?.Invoke(handler, new[] { query });
     }
 }

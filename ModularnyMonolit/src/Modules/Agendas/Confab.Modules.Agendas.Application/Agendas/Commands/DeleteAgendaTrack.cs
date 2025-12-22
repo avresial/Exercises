@@ -1,5 +1,5 @@
-﻿using System;
-using Confab.Shared.Abstractions.Commands;
+﻿using Confab.Shared.Abstractions.Commands;
+using System;
 
 namespace Confab.Modules.Agendas.Application.Agendas.Commands;
 

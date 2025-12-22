@@ -1,4 +1,5 @@
 ﻿namespace Confab.Modules.Conferences.Core.Entities;
+
 public class Host
 {
     public Guid Id { get; set; }

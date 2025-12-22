@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Confab.Modules.Tickets.Core.DTO;
+﻿using Confab.Modules.Tickets.Core.DTO;
 using Confab.Modules.Tickets.Core.Entities;
 using Confab.Modules.Tickets.Core.Events;
 using Confab.Modules.Tickets.Core.Exceptions;
@@ -10,6 +6,10 @@ using Confab.Modules.Tickets.Core.Repositories;
 using Confab.Shared.Abstractions.Messaging;
 using Confab.Shared.Abstractions.Time;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Tickets.Core.Services;
 
@@ -35,7 +35,7 @@ internal class TicketService : ITicketService
         _messageBroker = messageBroker;
         _logger = logger;
     }
-    
+
     public async Task PurchaseAsync(Guid conferenceId, Guid userId)
     {
         var conference = await _conferenceRepository.GetAsync(conferenceId);
@@ -56,7 +56,7 @@ internal class TicketService : ITicketService
         {
             throw new TicketSaleUnavailableException(conferenceId);
         }
-        
+
         if (ticketSale.Amount.HasValue)
         {
             await PurchaseAvailableAsync(ticketSale, userId, ticketSale.Price);
@@ -70,7 +70,7 @@ internal class TicketService : ITicketService
                                $"'{conferenceId}' by user: '{userId}'.");
         await _messageBroker.PublishAsync(new TicketPurchased(ticket.Id, conferenceId, userId));
     }
-    
+
     private async Task PurchaseAvailableAsync(TicketSale ticketSale, Guid userId, decimal? price)
     {
         var conferenceId = ticketSale.ConferenceId;

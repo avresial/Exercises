@@ -1,25 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Confab.Modules.Agendas.Domain.Submissions.Consts;
+﻿using Confab.Modules.Agendas.Domain.Submissions.Consts;
 using Confab.Modules.Agendas.Domain.Submissions.Events;
 using Confab.Modules.Agendas.Domain.Submissions.Exceptions;
 using Confab.Shared.Abstractions.Kernel.Types;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Confab.Modules.Agendas.Domain.Submissions.Entities;
 
 public sealed class Submission : AggregateRoot
 {
     public ConferenceId ConferenceId { get; private set; }
-    public string  Title { get; private set; }
-    public string  Description { get; private set; }
+    public string Title { get; private set; }
+    public string Description { get; private set; }
     public int Level { get; private set; }
     public string Status { get; private set; }
     public IEnumerable<string> Tags { get; private set; }
     public IEnumerable<Speaker> Speakers => _speakers;
 
     private ICollection<Speaker> _speakers;
-    
-    public Submission(AggregateId id, ConferenceId conferenceId, string title, string description, int level, 
+
+    public Submission(AggregateId id, ConferenceId conferenceId, string title, string description, int level,
         string status, IEnumerable<string> tags, ICollection<Speaker> speakers, int version = 0)
         : this(id, conferenceId)
     {
@@ -48,9 +48,9 @@ public sealed class Submission : AggregateRoot
         submission.ChangeSpeakers(speakers);
         submission.ClearEvents();
         submission.Version = 0;
-        
+
         submission.AddEvent(new SubmissionAdded(submission));
-        
+
         return submission;
     }
 
@@ -60,18 +60,18 @@ public sealed class Submission : AggregateRoot
         {
             throw new EmptySubmissionTitleException(Id);
         }
-        
+
         Title = title;
         IncrementVersion();
     }
-    
+
     public void ChangeDescription(string description)
     {
         if (string.IsNullOrWhiteSpace(description))
         {
             throw new EmptySubmissionDescriptionException(Id);
         }
-        
+
         Description = description;
         IncrementVersion();
     }
@@ -85,7 +85,7 @@ public sealed class Submission : AggregateRoot
 
         Level = level;
         IncrementVersion();
-        
+
         bool IsNotInRange() => level < 1 || level > 6;
     }
 
@@ -102,7 +102,7 @@ public sealed class Submission : AggregateRoot
 
     public void Approve()
         => ChangeStatus(SubmissionStatus.Approved, SubmissionStatus.Rejected);
-    
+
     public void Reject()
         => ChangeStatus(SubmissionStatus.Rejected, SubmissionStatus.Approved);
 
@@ -112,7 +112,7 @@ public sealed class Submission : AggregateRoot
         {
             throw new InvalidSubmissionStatusException(Id, status, invalidStatus);
         }
-        
+
         Status = status;
         AddEvent(new SubmissionStatusChanged(this, status));
     }

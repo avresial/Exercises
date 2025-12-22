@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using System.Reflection;
 
 namespace Confab.Shared.Infrastructure.Modules;
+
 public static class Extensions
 {
     internal static IServiceCollection AddModuleInfo(this IServiceCollection services, IList<IModule> modules)

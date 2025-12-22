@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Confab.Modules.Agendas.Application.CallForPapers.Events;
+﻿using Confab.Modules.Agendas.Application.CallForPapers.Events;
 using Confab.Modules.Agendas.Application.CallForPapers.Exceptions;
 using Confab.Modules.Agendas.Domain.CallForPapers.Repositories;
 using Confab.Shared.Abstractions.Commands;
 using Confab.Shared.Abstractions.Messaging;
+using System.Threading.Tasks;
 
 
 namespace Confab.Modules.Agendas.Application.CallForPapers.Commands.Handlers;
@@ -18,14 +18,14 @@ public sealed class CreateCallForPapersHandler : ICommandHandler<CreateCallForPa
         _repository = repository;
         _messageBroker = messageBroker;
     }
-    
+
     public async Task HandleAsync(CreateCallForPapers command)
     {
         if (await _repository.ExistsAsync(command.ConferenceId))
         {
             throw new CallForPapersAlreadyExistsException(command.ConferenceId);
         }
-        
+
         var callForPapers = Domain.CallForPapers.Entities.CallForPapers.Create(command.Id, command.ConferenceId,
             command.From, command.To);
 

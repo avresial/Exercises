@@ -1,4 +1,5 @@
 ﻿namespace Confab.Shared.Abstractions.Modules;
+
 public interface IModuleClient
 {
     Task SendAsync(string path, object request);

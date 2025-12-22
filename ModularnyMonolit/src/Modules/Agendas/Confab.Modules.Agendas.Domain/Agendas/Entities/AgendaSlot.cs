@@ -1,15 +1,15 @@
-﻿using System;
-using Confab.Modules.Agendas.Domain.CallForPapers.Exceptions;
+﻿using Confab.Modules.Agendas.Domain.CallForPapers.Exceptions;
 using Confab.Shared.Abstractions.Kernel.Types;
+using System;
 
 namespace Confab.Modules.Agendas.Domain.Agendas.Entities;
 
 public abstract class AgendaSlot
 {
     public EntityId Id { get; protected set; }
-    public DateTime From { get; protected set;}
-    public DateTime To { get; protected set;}
-    
+    public DateTime From { get; protected set; }
+    public DateTime To { get; protected set; }
+
     public AgendaTrack Track { get; protected set; }
 
     protected AgendaSlot(EntityId id, DateTime from, DateTime to)
@@ -25,7 +25,7 @@ public abstract class AgendaSlot
 
     protected AgendaSlot(EntityId id)
         => Id = id;
-    
+
     protected void ChangeDateRange(DateTime from, DateTime to)
     {
         if (from.Date > to.Date)

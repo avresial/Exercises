@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Confab.Shared.Abstractions.Messaging;
+﻿using Confab.Shared.Abstractions.Messaging;
 using Confab.Shared.Abstractions.Modules;
 using Confab.Shared.Infrastructure.Messaging.Dispatchers;
 using Convey.MessageBrokers;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Confab.Shared.Infrastructure.Messaging.Brokers;
 
@@ -39,7 +39,7 @@ internal sealed class MessageBroker : IMessageBroker
         }
 
         var tasks = new List<Task>();
-        
+
         foreach (var message in messages)
         {
             await _busPublisher.PublishAsync(message); // External RabbitMQ message broker
@@ -48,7 +48,7 @@ internal sealed class MessageBroker : IMessageBroker
                 await _asyncMessageDispatcher.PublishAsync(message);
                 continue;
             }
-            
+
             tasks.Add(_moduleClient.PublishAsync(message));
         }
 

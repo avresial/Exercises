@@ -1,10 +1,10 @@
+using Confab.Modules.Tickets.Core.Entities;
+using Confab.Modules.Tickets.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Confab.Modules.Tickets.Core.Entities;
-using Confab.Modules.Tickets.Core.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace Confab.Modules.Tickets.Core.DAL.Repositories;
 

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Confab.Modules.Attendances.Application.Commands;
 using Confab.Modules.Attendances.Application.DTO;
 using Confab.Modules.Attendances.Application.Queries;
@@ -9,6 +6,9 @@ using Confab.Shared.Abstractions.Contexts;
 using Confab.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Attendances.Api.Controllers
 {
@@ -26,7 +26,7 @@ namespace Confab.Modules.Attendances.Api.Controllers
             _queryDispatcher = queryDispatcher;
             _context = context;
         }
-        
+
         [HttpGet("{conferenceId:guid}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]

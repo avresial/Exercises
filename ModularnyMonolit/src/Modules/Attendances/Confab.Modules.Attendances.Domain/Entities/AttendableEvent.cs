@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Confab.Modules.Attendances.Domain.Exceptions;
+﻿using Confab.Modules.Attendances.Domain.Exceptions;
 using Confab.Modules.Attendances.Domain.Types;
 using Confab.Shared.Abstractions.Kernel.Types;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Confab.Modules.Attendances.Domain.Entities
 {

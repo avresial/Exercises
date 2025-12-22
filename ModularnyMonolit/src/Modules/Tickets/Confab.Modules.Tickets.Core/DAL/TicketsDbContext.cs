@@ -8,7 +8,7 @@ internal class TicketsDbContext : DbContext
     public DbSet<Conference> Conferences { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<TicketSale> TicketSales { get; set; }
-    
+
     public TicketsDbContext(DbContextOptions<TicketsDbContext> options) : base(options)
     {
     }

@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Confab.Modules.Agendas.Application.Agendas.Events;
+﻿using Confab.Modules.Agendas.Application.Agendas.Events;
 using Confab.Modules.Agendas.Application.Agendas.Exceptions;
 using Confab.Modules.Agendas.Domain.Agendas.Repositories;
 using Confab.Shared.Abstractions.Commands;
 using Confab.Shared.Abstractions.Messaging;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Application.Agendas.Commands.Handlers;
 
@@ -17,7 +17,7 @@ internal sealed class ChangeAgendaTrackNameHandler : ICommandHandler<ChangeAgend
         _repository = repository;
         _messageBroker = messageBroker;
     }
-    
+
     public async Task HandleAsync(ChangeAgendaTrackName command)
     {
         var agendaTrack = await _repository.GetAsync(command.Id);
@@ -26,7 +26,7 @@ internal sealed class ChangeAgendaTrackNameHandler : ICommandHandler<ChangeAgend
         {
             throw new AgendaTrackNotFoundException(command.Id);
         }
-        
+
         agendaTrack.ChangeName(command.Name);
 
         await _repository.UpdateAsync(agendaTrack);

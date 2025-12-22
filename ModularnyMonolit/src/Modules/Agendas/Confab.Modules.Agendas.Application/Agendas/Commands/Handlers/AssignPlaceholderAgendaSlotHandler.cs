@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Confab.Modules.Agendas.Application.Agendas.Events;
+﻿using Confab.Modules.Agendas.Application.Agendas.Events;
 using Confab.Modules.Agendas.Application.Agendas.Exceptions;
 using Confab.Modules.Agendas.Domain.Agendas.Repositories;
 using Confab.Shared.Abstractions.Commands;
 using Confab.Shared.Abstractions.Messaging;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Application.Agendas.Commands.Handlers;
 
@@ -17,7 +17,7 @@ internal sealed class AssignPlaceholderAgendaSlotHandler : ICommandHandler<Assig
         _repository = repository;
         _messageBroker = messageBroker;
     }
-    
+
     public async Task HandleAsync(AssignPlaceholderAgendaSlot command)
     {
         var agendaTrack = await _repository.GetAsync(command.AgendaTrackId);
@@ -28,7 +28,7 @@ internal sealed class AssignPlaceholderAgendaSlotHandler : ICommandHandler<Assig
         }
 
         agendaTrack.ChangeSlotPlaceholder(command.AgendaSlotId, command.Placeholder);
-        
+
         await _repository.UpdateAsync(agendaTrack);
         await _messageBroker.PublishAsync(new PlaceholderAssignedToAgendaSlot(command.AgendaSlotId, command.Placeholder));
     }

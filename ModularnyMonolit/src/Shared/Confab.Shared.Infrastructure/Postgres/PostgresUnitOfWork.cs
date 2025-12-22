@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 namespace Confab.Shared.Infrastructure.Postgres;
+
 public abstract class PostgresUnitOfWork<T>(T dbContext) : IUnitOfWork where T : DbContext
 {
     public async Task ExecuteAsync(Func<Task> action)

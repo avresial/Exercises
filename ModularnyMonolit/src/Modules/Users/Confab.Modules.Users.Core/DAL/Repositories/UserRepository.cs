@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Confab.Modules.Users.Core.Entities;
+﻿using Confab.Modules.Users.Core.Entities;
 using Confab.Modules.Users.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Users.Core.DAL.Repositories;
 
@@ -18,7 +18,7 @@ internal class UserRepository : IUserRepository
     }
 
     public Task<User> GetAsync(Guid id) => _users.SingleOrDefaultAsync(x => x.Id == id);
-    
+
     public Task<User> GetAsync(string email) => _users.SingleOrDefaultAsync(x => x.Email == email);
 
     public async Task AddAsync(User user)

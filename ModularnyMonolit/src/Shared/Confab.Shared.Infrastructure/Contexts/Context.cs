@@ -1,6 +1,6 @@
-﻿using System;
-using Confab.Shared.Abstractions.Contexts;
+﻿using Confab.Shared.Abstractions.Contexts;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Confab.Shared.Infrastructure.Contexts;
 

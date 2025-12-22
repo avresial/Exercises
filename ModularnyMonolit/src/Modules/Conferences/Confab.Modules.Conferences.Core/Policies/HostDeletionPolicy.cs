@@ -1,6 +1,7 @@
 ﻿using Confab.Modules.Conferences.Core.Entities;
 
 namespace Confab.Modules.Conferences.Core.Policies;
+
 internal class HostDeletionPolicy : IHostDeletionPolicy
 {
     private readonly IConferenceDeletionPolicy _conferenceDeletionPolicy;

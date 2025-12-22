@@ -1,4 +1,5 @@
 ﻿namespace Confab.Shared.Infrastructure.Modules;
+
 public sealed class ModuleBroadcastRegistration(Type receiverType, Func<object, Task> action)
 {
     public Type ReceiverType { get; } = receiverType;

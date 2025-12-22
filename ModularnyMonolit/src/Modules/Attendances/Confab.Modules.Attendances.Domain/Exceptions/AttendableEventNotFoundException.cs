@@ -1,5 +1,5 @@
-﻿using System;
-using Confab.Shared.Abstractions.Exceptions;
+﻿using Confab.Shared.Abstractions.Exceptions;
+using System;
 
 namespace Confab.Modules.Attendances.Domain.Exceptions
 {
@@ -7,7 +7,7 @@ namespace Confab.Modules.Attendances.Domain.Exceptions
     {
         public Guid Id { get; }
 
-        public AttendableEventNotFoundException(Guid id) 
+        public AttendableEventNotFoundException(Guid id)
             : base($"Attendable event with ID: '{id}' was not found.")
         {
             Id = id;

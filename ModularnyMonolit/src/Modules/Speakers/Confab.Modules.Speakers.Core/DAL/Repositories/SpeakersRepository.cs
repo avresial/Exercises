@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Confab.Modules.Speakers.Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Confab.Modules.Speakers.Core.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace Confab.Modules.Speakers.Core.DAL.Repositories;
 

@@ -6,7 +6,7 @@ namespace Confab.Modules.Users.Core.DAL;
 internal class UsersDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
-    
+
     public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options)
     {
     }

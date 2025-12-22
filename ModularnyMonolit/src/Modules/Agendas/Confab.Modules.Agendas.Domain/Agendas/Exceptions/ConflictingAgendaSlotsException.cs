@@ -1,11 +1,11 @@
-﻿using System;
-using Confab.Shared.Abstractions.Exceptions;
+﻿using Confab.Shared.Abstractions.Exceptions;
+using System;
 
 namespace Confab.Modules.Agendas.Domain.Agendas.Exceptions;
 
 public class ConflictingAgendaSlotsException : ConfabException
 {
-    public ConflictingAgendaSlotsException(DateTime from, DateTime to) 
+    public ConflictingAgendaSlotsException(DateTime from, DateTime to)
         : base($"There is slot conflicting with date range: {from} | {to}.")
     {
     }

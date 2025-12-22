@@ -2,6 +2,7 @@
 
 
 namespace Confab.Shared.Infrastructure.Modules;
+
 internal sealed class ModuleClient(IModuleRegistry moduleRegistry, IModuleSerializer moduleSerializer) : IModuleClient
 {
     public Task SendAsync(string path, object request) => SendAsync<object>(path, request);

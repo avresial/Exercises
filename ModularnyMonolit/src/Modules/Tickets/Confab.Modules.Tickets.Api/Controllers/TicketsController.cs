@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Confab.Modules.Tickets.Core.DTO;
+﻿using Confab.Modules.Tickets.Core.DTO;
 using Confab.Modules.Tickets.Core.Services;
 using Confab.Shared.Abstractions.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Tickets.Api.Controllers;
 

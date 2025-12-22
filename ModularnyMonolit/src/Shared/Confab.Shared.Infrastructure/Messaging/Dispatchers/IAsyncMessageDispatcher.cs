@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Confab.Shared.Abstractions.Messaging;
+﻿using Confab.Shared.Abstractions.Messaging;
+using System.Threading.Tasks;
 
 namespace Confab.Shared.Infrastructure.Messaging.Dispatchers;
 

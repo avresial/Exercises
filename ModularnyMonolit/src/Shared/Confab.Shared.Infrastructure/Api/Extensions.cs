@@ -17,7 +17,7 @@ public static class Extensions
         object value)
     {
         var memberExpression = expression.Body as MemberExpression ??
-                               ((UnaryExpression) expression.Body).Operand as MemberExpression;
+                               ((UnaryExpression)expression.Body).Operand as MemberExpression;
         if (memberExpression is null)
         {
             return model;

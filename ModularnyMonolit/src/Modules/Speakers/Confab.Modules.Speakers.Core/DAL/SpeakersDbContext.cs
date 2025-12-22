@@ -6,7 +6,7 @@ namespace Confab.Modules.Speakers.Core.DAL;
 public class SpeakersDbContext : DbContext
 {
     public DbSet<Speaker> Speakers { get; set; }
-    
+
     public SpeakersDbContext(DbContextOptions<SpeakersDbContext> options) : base(options)
     {
     }

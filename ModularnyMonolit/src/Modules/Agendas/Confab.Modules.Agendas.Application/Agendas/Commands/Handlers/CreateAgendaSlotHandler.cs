@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using Confab.Modules.Agendas.Application.Agendas.Events;
+﻿using Confab.Modules.Agendas.Application.Agendas.Events;
 using Confab.Modules.Agendas.Application.Agendas.Exceptions;
 using Confab.Modules.Agendas.Application.Agendas.Types;
 using Confab.Modules.Agendas.Domain.Agendas.Repositories;
 using Confab.Shared.Abstractions.Commands;
 using Confab.Shared.Abstractions.Messaging;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Application.Agendas.Commands.Handlers;
 
@@ -18,7 +18,7 @@ internal sealed class CreateAgendaSlotHandler : ICommandHandler<CreateAgendaSlot
         _repository = repository;
         _messageBroker = messageBroker;
     }
-    
+
     public async Task HandleAsync(CreateAgendaSlot command)
     {
         var agendaTrack = await _repository.GetAsync(command.AgendaTrackId);
@@ -27,7 +27,7 @@ internal sealed class CreateAgendaSlotHandler : ICommandHandler<CreateAgendaSlot
         {
             throw new AgendaTrackNotFoundException(command.Id);
         }
-        
+
         if (command.Type is AgendaSlotType.Regular)
         {
             agendaTrack.AddRegularSlot(command.Id, command.From, command.To, command.ParticipantsLimit);

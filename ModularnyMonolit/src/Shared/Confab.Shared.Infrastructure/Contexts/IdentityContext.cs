@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Confab.Shared.Abstractions.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using Confab.Shared.Abstractions.Contexts;
 
 namespace Confab.Shared.Infrastructure.Contexts;
 
@@ -12,7 +12,7 @@ internal class IdentityContext : IIdentityContext
     public Guid Id { get; }
     public string Role { get; }
     public Dictionary<string, IEnumerable<string>> Claims { get; }
-    
+
     public IdentityContext(ClaimsPrincipal principal)
     {
         IsAuthenticated = principal.Identity?.IsAuthenticated is true;

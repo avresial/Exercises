@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using Confab.Modules.Agendas.Application.Agendas.Events;
+﻿using Confab.Modules.Agendas.Application.Agendas.Events;
 using Confab.Modules.Agendas.Application.Agendas.Exceptions;
 using Confab.Modules.Agendas.Domain.Agendas.Entities;
 using Confab.Modules.Agendas.Domain.Agendas.Repositories;
 using Confab.Shared.Abstractions.Commands;
 using Confab.Shared.Abstractions.Messaging;
+using System.Threading.Tasks;
 
 namespace Confab.Modules.Agendas.Application.Agendas.Commands.Handlers;
 
@@ -27,7 +27,7 @@ internal sealed class CreateAgendaTrackHandler : ICommandHandler<CreateAgendaTra
         }
 
         var agendaTrack = AgendaTrack.Create(command.Id, command.ConferenceId, command.Name);
-        
+
         await _repository.AddAsync(agendaTrack);
         await _messageBroker.PublishAsync(new AgendaTrackCreated(agendaTrack.Id));
     }

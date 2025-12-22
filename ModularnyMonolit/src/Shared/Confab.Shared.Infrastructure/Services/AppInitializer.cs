@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Confab.Shared.Infrastructure.Services;
 
@@ -19,7 +19,7 @@ internal class AppInitializer : IHostedService
         _serviceProvider = serviceProvider;
         _logger = logger;
     }
-    
+
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         var dbContextTypes = AppDomain.CurrentDomain.GetAssemblies()
@@ -34,7 +34,7 @@ internal class AppInitializer : IHostedService
             {
                 continue;
             }
-            
+
             await dbContext.Database.MigrateAsync(cancellationToken);
         }
     }

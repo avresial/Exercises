@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Confab.Shared.Abstractions.Kernel;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Confab.Shared.Abstractions.Kernel;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Confab.Shared.Infrastructure.Kernel;
 
@@ -25,11 +25,11 @@ internal sealed class DomainEventDispatcher : IDomainEventDispatcher
         {
             var handlerType = typeof(IDomainEventHandler<>).MakeGenericType(@event.GetType());
             var handlers = scope.ServiceProvider.GetServices(handlerType);
-            
-            var tasks = handlers.Select(x => (Task) handlerType
+
+            var tasks = handlers.Select(x => (Task)handlerType
                 .GetMethod(nameof(IDomainEventHandler<IDomainEvent>.HandleAsync))
-                ?.Invoke(x, new[] {@event}));
-            
+                ?.Invoke(x, new[] { @event }));
+
             await Task.WhenAll(tasks);
         }
     }

@@ -1,13 +1,13 @@
-﻿using System;
-using Confab.Shared.Abstractions.Exceptions;
+﻿using Confab.Shared.Abstractions.Exceptions;
+using System;
 
 namespace Confab.Modules.Agendas.Domain.Agendas.Exceptions;
 
 public class EmptyAgendaItemTagsException : ConfabException
 {
     public Guid AgendaItemId { get; }
-    
-    public EmptyAgendaItemTagsException(Guid agendaItemId) 
+
+    public EmptyAgendaItemTagsException(Guid agendaItemId)
         : base($"Agenda Item with id: '{agendaItemId}' defines empty tags.")
         => AgendaItemId = agendaItemId;
 }
