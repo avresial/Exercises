@@ -5,32 +5,31 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Confab.Modules.Attendances.Application.Events.External.Handlers
+namespace Confab.Modules.Attendances.Application.Events.External.Handlers;
+
+internal sealed class TicketPurchasedHandler : IEventHandler<TicketPurchased>
 {
-    internal sealed class TicketPurchasedHandler : IEventHandler<TicketPurchased>
+    private readonly IParticipantsRepository _participantsRepository;
+    private readonly ILogger<TicketPurchasedHandler> _logger;
+
+    public TicketPurchasedHandler(IParticipantsRepository participantsRepository,
+        ILogger<TicketPurchasedHandler> logger)
     {
-        private readonly IParticipantsRepository _participantsRepository;
-        private readonly ILogger<TicketPurchasedHandler> _logger;
+        _participantsRepository = participantsRepository;
+        _logger = logger;
+    }
 
-        public TicketPurchasedHandler(IParticipantsRepository participantsRepository,
-            ILogger<TicketPurchasedHandler> logger)
+    public async Task HandleAsync(TicketPurchased @event)
+    {
+        var participant = await _participantsRepository.GetAsync(@event.ConferenceId, @event.UserId);
+        if (participant is not null)
         {
-            _participantsRepository = participantsRepository;
-            _logger = logger;
+            return;
         }
 
-        public async Task HandleAsync(TicketPurchased @event)
-        {
-            var participant = await _participantsRepository.GetAsync(@event.ConferenceId, @event.UserId);
-            if (participant is not null)
-            {
-                return;
-            }
-
-            participant = new Participant(Guid.NewGuid(), @event.ConferenceId, @event.UserId);
-            await _participantsRepository.AddAsync(participant);
-            _logger.LogInformation($"Added a participant with ID: '{participant.Id}' " +
-                                   $"for conference: '{participant.ConferenceId}', user: '{participant.UserId}'.");
-        }
+        participant = new Participant(Guid.NewGuid(), @event.ConferenceId, @event.UserId);
+        await _participantsRepository.AddAsync(participant);
+        _logger.LogInformation($"Added a participant with ID: '{participant.Id}' " +
+                               $"for conference: '{participant.ConferenceId}', user: '{participant.UserId}'.");
     }
 }

@@ -3,38 +3,37 @@ using Confab.Modules.Attendances.Domain.Repositories;
 using Confab.Shared.Abstractions.Commands;
 using System.Threading.Tasks;
 
-namespace Confab.Modules.Attendances.Application.Commands.Handlers
+namespace Confab.Modules.Attendances.Application.Commands.Handlers;
+
+internal sealed class AttendEventHandler : ICommandHandler<AttendEvent>
 {
-    internal sealed class AttendEventHandler : ICommandHandler<AttendEvent>
+    private readonly IAttendableEventsRepository _attendableEventsRepository;
+    private readonly IParticipantsRepository _participantsRepository;
+
+    public AttendEventHandler(IAttendableEventsRepository attendableEventsRepository,
+        IParticipantsRepository participantsRepository)
     {
-        private readonly IAttendableEventsRepository _attendableEventsRepository;
-        private readonly IParticipantsRepository _participantsRepository;
+        _attendableEventsRepository = attendableEventsRepository;
+        _participantsRepository = participantsRepository;
+    }
 
-        public AttendEventHandler(IAttendableEventsRepository attendableEventsRepository,
-            IParticipantsRepository participantsRepository)
+    public async Task HandleAsync(AttendEvent command)
+    {
+        var attendableEvent = await _attendableEventsRepository.GetAsync(command.Id);
+        if (attendableEvent is null)
         {
-            _attendableEventsRepository = attendableEventsRepository;
-            _participantsRepository = participantsRepository;
+            throw new AttendableEventNotFoundException(command.Id);
         }
 
-        public async Task HandleAsync(AttendEvent command)
+        var participant = await _participantsRepository
+            .GetAsync(attendableEvent.ConferenceId, command.ParticipantId);
+        if (participant is null)
         {
-            var attendableEvent = await _attendableEventsRepository.GetAsync(command.Id);
-            if (attendableEvent is null)
-            {
-                throw new AttendableEventNotFoundException(command.Id);
-            }
-
-            var participant = await _participantsRepository
-                .GetAsync(attendableEvent.ConferenceId, command.ParticipantId);
-            if (participant is null)
-            {
-                throw new ParticipantNotFoundException(attendableEvent.ConferenceId, command.ParticipantId);
-            }
-
-            attendableEvent.Attend(participant);
-            await _participantsRepository.UpdateAsync(participant);
-            await _attendableEventsRepository.UpdateAsync(attendableEvent);
+            throw new ParticipantNotFoundException(attendableEvent.ConferenceId, command.ParticipantId);
         }
+
+        attendableEvent.Attend(participant);
+        await _participantsRepository.UpdateAsync(participant);
+        await _attendableEventsRepository.UpdateAsync(attendableEvent);
     }
 }

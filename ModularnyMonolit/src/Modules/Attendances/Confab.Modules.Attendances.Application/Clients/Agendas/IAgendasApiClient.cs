@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Confab.Modules.Attendances.Application.Clients.Agendas
+namespace Confab.Modules.Attendances.Application.Clients.Agendas;
+
+public interface IAgendasApiClient
 {
-    public interface IAgendasApiClient
-    {
-        Task<RegularAgendaSlotDto> GetRegularAgendaSlotAsync(Guid id);
-        Task<IEnumerable<AgendaTrackDto>> GetAgendaAsync(Guid conferenceId);
-    }
+    Task<RegularAgendaSlotDto> GetRegularAgendaSlotAsync(Guid id);
+    Task<IEnumerable<AgendaTrackDto>> GetAgendaAsync(Guid conferenceId);
 }
