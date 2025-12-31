@@ -40,6 +40,12 @@
   <Folder Name="/src/shared/">
     <Project Path="src/Shared/Confab.Shared.Abstractions/Confab.Shared.Abstractions.csproj" />
     <Project Path="src/Shared/Confab.Shared.Infrastructure/Confab.Shared.Infrastructure.csproj" />
+    <Project Path="src/Shared/Confab.Shared.Tests/Confab.Shared.Tests.csproj" />
   </Folder>
   <Folder Name="/test/" />
+  <Folder Name="/test/modules/" />
+  <Folder Name="/test/modules/Attendances/">
+    <Project Path="tests/Modules/Attendances/Confab.Modules.Attendances.Tests.Integration/Confab.Modules.Attendances.Tests.Integration.csproj" />
+    <Project Path="tests/Modules/Attendances/Confab.Modules.Attendances.Tests.Unit/Confab.Modules.Attendances.Tests.Unit.csproj" />
+  </Folder>
 </Solution>
