@@ -25,6 +25,9 @@
     <Project Path="src/Modules/Conferences/Confab.Modules.Conferences.Api/Confab.Modules.Conferences.Api.csproj" />
     <Project Path="src/Modules/Conferences/Confab.Modules.Conferences.Core/Confab.Modules.Conferences.Core.csproj" />
   </Folder>
+  <Folder Name="/src/modules/Saga/">
+    <Project Path="src/Modules/Saga/Confab.Modules.Saga/Confab.Modules.Saga.csproj" />
+  </Folder>
   <Folder Name="/src/modules/Speakers/">
     <Project Path="src/Modules/Speakers/Confab.Modules.Speakers.Api/Confab.Modules.Speakers.Api.csproj" />
     <Project Path="src/Modules/Speakers/Confab.Modules.Speakers.Core/Confab.Modules.Speakers.Core.csproj" />
